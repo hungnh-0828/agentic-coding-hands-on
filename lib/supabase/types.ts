@@ -26,6 +26,9 @@ export type Database = {
           description: string | null;
           thumbnail_url: string | null;
           display_order: number;
+          prize_count: number | null;
+          unit_label: string | null;
+          prize_value: string | null;
           created_at: string;
         };
         Insert: {
@@ -35,6 +38,9 @@ export type Database = {
           description?: string | null;
           thumbnail_url?: string | null;
           display_order?: number;
+          prize_count?: number | null;
+          unit_label?: string | null;
+          prize_value?: string | null;
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["awards"]["Insert"]>;

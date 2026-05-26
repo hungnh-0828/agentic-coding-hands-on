@@ -67,6 +67,19 @@
     "loading": "Signing in...",
     "alreadyAuthed": "You are already signed in. Redirecting..."
   },
+  "awardsInfo": {
+    "banner": {
+      "title": "ROOT FURTHER",
+      "subtitle": "Sun* Annual Award 2025"
+    },
+    "caption": "Sun* annual awards 2025",
+    "title": "SAA 2025 Awards System",
+    "navAria": "Awards categories",
+    "prizeCountLabel": "Number of prizes:",
+    "prizeValueLabel": "Prize value:",
+    "perPrize": "per prize",
+    "redirectingToLogin": "Redirecting to sign-in page..."
+  },
   "common": {
     "comingSoon": "Coming soon..."
   }

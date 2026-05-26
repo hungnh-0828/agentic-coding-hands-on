@@ -67,6 +67,19 @@
     "loading": "Đang đăng nhập...",
     "alreadyAuthed": "Bạn đã đăng nhập. Đang chuyển hướng..."
   },
+  "awardsInfo": {
+    "banner": {
+      "title": "ROOT FURTHER",
+      "subtitle": "Sun* Annual Award 2025"
+    },
+    "caption": "Sun* annual awards 2025",
+    "title": "Hệ thống giải thưởng SAA 2025",
+    "navAria": "Danh mục giải thưởng",
+    "prizeCountLabel": "Số lượng giải thưởng:",
+    "prizeValueLabel": "Giá trị giải thưởng:",
+    "perPrize": "cho mỗi giải thưởng",
+    "redirectingToLogin": "Đang chuyển hướng đến trang đăng nhập..."
+  },
   "common": {
     "comingSoon": "Coming soon..."
   }
