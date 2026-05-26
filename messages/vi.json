@@ -80,6 +80,9 @@
     "perPrize": "cho mỗi giải thưởng",
     "redirectingToLogin": "Đang chuyển hướng đến trang đăng nhập..."
   },
+  "prelaunch": {
+    "title": "Sự kiện sẽ bắt đầu sau"
+  },
   "common": {
     "comingSoon": "Coming soon..."
   }

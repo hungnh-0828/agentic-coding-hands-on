@@ -80,6 +80,9 @@
     "perPrize": "per prize",
     "redirectingToLogin": "Redirecting to sign-in page..."
   },
+  "prelaunch": {
+    "title": "The event starts in"
+  },
   "common": {
     "comingSoon": "Coming soon..."
   }

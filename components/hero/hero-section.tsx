@@ -1,14 +1,14 @@
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/lib/i18n/navigation";
+import { getEventISO } from "@/lib/event";
 
 import { CountdownTimer } from "./countdown-timer";
 import { EventInfo } from "./event-info";
 
 export function HeroSection() {
   const t = useTranslations("hero");
-  const eventISO =
-    process.env.NEXT_PUBLIC_EVENT_DATETIME ?? "2025-12-31T18:30:00+07:00";
+  const eventISO = getEventISO();
 
   const isFuture = Date.parse(eventISO) > Date.now();
 
