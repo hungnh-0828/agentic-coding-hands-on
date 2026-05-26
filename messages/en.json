@@ -83,6 +83,57 @@
   "prelaunch": {
     "title": "The event starts in"
   },
+  "kudos": {
+    "banner": {
+      "eyebrow": "SAA 2025 KUDOS",
+      "title": "The thank-you board"
+    },
+    "sendInput": {
+      "placeholder": "Who do you want to thank today?"
+    },
+    "filters": {
+      "hashtag": "Hashtag",
+      "department": "Department",
+      "all": "All"
+    },
+    "highlight": {
+      "eyebrow": "Sun* Annual Awards 2025",
+      "title": "HIGHLIGHT KUDOS",
+      "empty": "No Kudos yet."
+    },
+    "spotlight": {
+      "eyebrow": "Sun* Annual Awards 2025",
+      "title": "SPOTLIGHT BOARD",
+      "total": "{count} KUDOS",
+      "searchPlaceholder": "Search"
+    },
+    "allKudos": {
+      "eyebrow": "Sun* Annual Awards 2025",
+      "title": "ALL KUDOS",
+      "empty": "No Kudos yet."
+    },
+    "card": {
+      "copyLink": "Copy Link",
+      "viewDetail": "View details",
+      "copiedToast": "Link copied — ready to share!",
+      "sentTo": "sent to",
+      "likeAria": "Like — current {count}",
+      "carouselPrev": "Previous slide",
+      "carouselNext": "Next slide"
+    },
+    "sidebar": {
+      "received": "Kudos you received",
+      "sent": "Kudos you sent",
+      "hearts": "Hearts you received",
+      "boxOpened": "Secret Boxes opened",
+      "boxUnopened": "Secret Boxes unopened",
+      "openBox": "Open box",
+      "recentRanks": "10 LATEST RANK-UPS",
+      "recentPrizes": "10 LATEST PRIZE RECIPIENTS",
+      "empty": "No data yet"
+    },
+    "todoToast": "Feature in progress"
+  },
   "common": {
     "comingSoon": "Coming soon..."
   }

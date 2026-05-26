@@ -83,6 +83,57 @@
   "prelaunch": {
     "title": "Sự kiện sẽ bắt đầu sau"
   },
+  "kudos": {
+    "banner": {
+      "eyebrow": "SAA 2025 KUDOS",
+      "title": "Hệ thống ghi nhận lời cảm ơn"
+    },
+    "sendInput": {
+      "placeholder": "Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?"
+    },
+    "filters": {
+      "hashtag": "Hashtag",
+      "department": "Phòng ban",
+      "all": "Tất cả"
+    },
+    "highlight": {
+      "eyebrow": "Sun* Annual Awards 2025",
+      "title": "HIGHLIGHT KUDOS",
+      "empty": "Hiện tại chưa có Kudos nào."
+    },
+    "spotlight": {
+      "eyebrow": "Sun* Annual Awards 2025",
+      "title": "SPOTLIGHT BOARD",
+      "total": "{count} KUDOS",
+      "searchPlaceholder": "Tìm kiếm"
+    },
+    "allKudos": {
+      "eyebrow": "Sun* Annual Awards 2025",
+      "title": "ALL KUDOS",
+      "empty": "Hiện tại chưa có Kudos nào."
+    },
+    "card": {
+      "copyLink": "Copy Link",
+      "viewDetail": "Xem chi tiết",
+      "copiedToast": "Link copied — ready to share!",
+      "sentTo": "đã gửi đến",
+      "likeAria": "Thả tim — hiện {count}",
+      "carouselPrev": "Slide trước",
+      "carouselNext": "Slide kế"
+    },
+    "sidebar": {
+      "received": "Số Kudos bạn nhận được",
+      "sent": "Số Kudos bạn đã gửi",
+      "hearts": "Số tim bạn nhận được",
+      "boxOpened": "Số Secret Box bạn đã mở",
+      "boxUnopened": "Số Secret Box chưa mở",
+      "openBox": "Mở quà",
+      "recentRanks": "10 SUNNER CÓ SỰ THĂNG HẠNG MỚI NHẤT",
+      "recentPrizes": "10 SUNNER NHẬN QUÀ MỚI NHẤT",
+      "empty": "Chưa có dữ liệu"
+    },
+    "todoToast": "Tính năng đang phát triển"
+  },
   "common": {
     "comingSoon": "Coming soon..."
   }
