@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-saa-bg: #0a0d12;
+  --color-saa-bg-elev: #11151c;
+  --color-saa-text: #f5f5f5;
+  --color-saa-muted: #9aa0aa;
+  --color-saa-accent: #ffd400;
+  --color-saa-accent-soft: #ffe98a;
+  --color-saa-border: rgba(255, 212, 0, 0.4);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-saa-bg);
+  color: var(--color-saa-text);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-image:
+    radial-gradient(60% 50% at 20% 10%, rgba(255, 212, 0, 0.06), transparent 70%),
+    radial-gradient(50% 40% at 90% 25%, rgba(255, 212, 0, 0.04), transparent 70%);
+  background-attachment: fixed;
+}
+
+.saa-card-glow {
+  box-shadow:
+    0 0 0 1px var(--color-saa-border),
+    0 10px 40px -10px rgba(255, 212, 0, 0.25);
+}
+
+.saa-card-glow:hover {
+  box-shadow:
+    0 0 0 1px var(--color-saa-accent),
+    0 18px 60px -10px rgba(255, 212, 0, 0.45);
+  transform: translateY(-2px);
 }

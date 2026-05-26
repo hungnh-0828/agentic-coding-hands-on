@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "about": "About SAA 2025",
+    "awards": "Awards Information",
+    "kudos": "Sun* Kudos"
+  },
+  "header": {
+    "language": "EN",
+    "languageEN": "EN",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "signOut": "Sign out",
+    "adminDashboard": "Admin Dashboard"
+  },
+  "hero": {
+    "title": "ROOT FURTHER",
+    "comingSoon": "Coming soon",
+    "labels": {
+      "days": "DAYS",
+      "hours": "HOURS",
+      "minutes": "MINUTES"
+    },
+    "event": {
+      "timeLabel": "Time:",
+      "timeValue": "18:30",
+      "locationLabel": "Venue:",
+      "locationValue": "Army Theatre",
+      "broadcast": "Live streaming on Sun* Family Facebook Group"
+    },
+    "ctaAwards": "ABOUT AWARDS",
+    "ctaKudos": "ABOUT KUDOS"
+  },
+  "rootFurther": {
+    "caption": "The spirit of SAA 2025",
+    "body": "A new season begins with the \"Root Further\" spirit – deepen the roots, hold the core values, and reach further. Every contributor, every team, every project deserves to be honored.",
+    "quote": "A tree with deep roots fears no storm"
+  },
+  "awards": {
+    "caption": "Sun* annual awards 2025",
+    "title": "Awards System",
+    "subtitle": "Categories awarded to the TOP of the most outstanding contributors.",
+    "detailLink": "Details"
+  },
+  "kudos": {
+    "label": "Recognition movement",
+    "title": "Sun* Kudos",
+    "description": "A new space where everyone recognizes and amplifies each other's value daily — small but real.",
+    "cta": "Details"
+  },
+  "footer": {
+    "copyright": "Copyright © Sun* 2025"
+  },
+  "widget": {
+    "nominate": "Quick nominate",
+    "sendKudos": "Send Kudos",
+    "contactOrganizer": "Contact organizer"
+  },
+  "notifications": {
+    "unread": "{count} unread",
+    "empty": "No new notifications."
+  },
+  "login": {
+    "title": "Sign in"
+  },
+  "common": {
+    "comingSoon": "Coming soon..."
+  }
+}
