@@ -60,7 +60,12 @@
     "empty": "Bạn không có thông báo mới."
   },
   "login": {
-    "title": "Đăng nhập"
+    "title": "Đăng nhập",
+    "welcomeLine1": "Bắt đầu hành trình của bạn cùng SAA 2025.",
+    "welcomeLine2": "Đăng nhập để khám phá!",
+    "googleCta": "Đăng nhập bằng Google",
+    "loading": "Đang đăng nhập...",
+    "alreadyAuthed": "Bạn đã đăng nhập. Đang chuyển hướng..."
   },
   "common": {
     "comingSoon": "Coming soon..."
