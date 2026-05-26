@@ -1,0 +1,63 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type
+ACCESSING,ID-0,Homepage SAA,Check access permission,Direct URL access,Unauthenticated user,,User is not logged in,URL: /,"1. Open browser; 2. Navigate to homepage URL; 3. Verify page loads",Homepage displayed successfully with all public content,,High,Access control
+ACCESSING,ID-1,Homepage SAA,,,Authenticated user,,User is logged in,URL: /,"1. User logs in; 2. Navigate to homepage; 3. Verify",Homepage displayed with notification bell account menu and personalized options,,High,Access control
+ACCESSING,ID-2,Homepage SAA,Check navigation path,From any page,Via logo click,,User on any page,,"1. Navigate any page; 2. Click logo; 3. Verify",Homepage displayed scrolled to top,,High,Access control
+ACCESSING,ID-3,Homepage SAA,,From header,Via navigation links,,User on any page,,"1. Click About SAA 2025 in header",Homepage About SAA 2025 section visible,,High,Access control
+ACCESSING,ID-4,Homepage SAA,,From footer,Via navigation links,,User on any page scrolled to footer,,"1. Click About SAA 2025 link in footer",Homepage scrolled to top,,Medium,Access control
+ACCESSING,ID-5,Homepage SAA,Check authentication,Admin menu option,Admin role only,,Admin logged in,Admin role,"1. Login admin; 2. Click account; 3. Verify",Account menu shows Admin Dashboard,,High,Access control
+ACCESSING,ID-6,Homepage SAA,,,,,Regular user logged in,Regular role,"1. Login regular; 2. Click account; 3. Verify",Account menu without Admin Dashboard,,High,Access control
+GUI,ID-7,Homepage SAA,Check layout,Screen-wide,Overall structure,,User on homepage,,"1. Observe structure",Header top with logo left nav center controls right; Hero with ROOT FURTHER centered; Countdown below hero; Awards grid 3-col desktop 2-col tablet/mobile; Sun* Kudos section; Widget button fixed bottom right; Footer at bottom,,High,Normal_Others
+GUI,ID-8,Homepage SAA,Initialize,Header logo,Default visibility,,User on homepage,,"1. Observe logo",Logo 64x60px visible at header left with alt text,,Medium,Normal_Others
+GUI,ID-9,Homepage SAA,,Navigation links,Active state,,User on homepage,,"1. Observe nav active link",About SAA 2025 link highlighted yellow with underline,,Medium,Normal_Others
+GUI,ID-10,Homepage SAA,,Language button,Default value,,User on homepage,,"1. Observe language",Language button displays VN,,Medium,Normal_Others
+GUI,ID-11,Homepage SAA,,Notification button,Default state,,Authenticated user,,"1. Observe notification",Notification icon 40x40px; Badge visible if unread > 0,,Medium,Normal_Others
+GUI,ID-12,Homepage SAA,,Countdown timer,Initial values,,User on homepage,Event datetime in env,"1. Observe countdown",Three units display 2-digit values with labels DAYS HOURS MINUTES,,High,Normal_Others
+GUI,ID-13,Homepage SAA,,Coming soon label,Initial visibility,,Event not started,,"1. Observe hero",Coming soon label visible below ROOT FURTHER,,Medium,Normal_Others
+GUI,ID-14,Homepage SAA,,Event information,Default content,,User on homepage,,"1. Observe event info",Thời gian: 18h30 / Địa điểm: Nhà hát nghệ thuật quân đội / Tường thuật trực tiếp tại Group Facebook Sun* Family,,Medium,Normal_Others
+GUI,ID-15,Homepage SAA,,Award cards,Grid layout,,Desktop,,"1. Observe awards on desktop",3-column grid; thumbnail + title + description + Chi tiết link,,High,Normal_Others
+GUI,ID-16,Homepage SAA,,,,,Tablet/mobile,,"1. Observe awards on tablet/mobile",2-column grid,,High,Normal_Others
+GUI,ID-17,Homepage SAA,,Footer,Default content,,User on homepage,,"1. Observe footer",Logo (left) nav links (center) copyright (right),,Medium,Normal_Others
+FUNCTION,ID-18,Homepage SAA,Component interaction,Logo,Click navigation,,User on any page,,"1. Click header logo",Page navigates home and scrolls to top,,High,Normal_Others
+FUNCTION,ID-19,Homepage SAA,,,,,User scrolled to footer,,"1. Click footer logo",Navigates home and scrolls to top,,High,Normal_Others
+FUNCTION,ID-20,Homepage SAA,,Navigation links,Click,,User on homepage,,"1. Click About SAA 2025",Scrolls to section or reloads homepage,,High,Normal_Others
+FUNCTION,ID-21,Homepage SAA,,,,,User on homepage,,"1. Click Awards Information",Navigates to Awards Information page,,High,Normal_Others
+FUNCTION,ID-22,Homepage SAA,,,,,User on homepage,,"1. Click Sun* Kudos",Navigates to Sun* Kudos page,,High,Normal_Others
+FUNCTION,ID-23,Homepage SAA,,,Hover state,,User on homepage,,"1. Hover Awards Information",Link bright background highlight,,Medium,Normal_Others
+FUNCTION,ID-24,Homepage SAA,,Language button,Menu toggle,,User on homepage,,"1. Click VN",Language menu opens with VN/EN,,High,Normal_Others
+FUNCTION,ID-25,Homepage SAA,,,Language switch,,Menu open,Select EN,"1. Click VN; 2. Select EN",Interface switches to English,,High,Normal_Others
+FUNCTION,ID-26,Homepage SAA,,,,,EN menu open,Select VN,"1. Click language; 2. Select VN",Interface switches to Vietnamese,,High,Normal_Others
+FUNCTION,ID-27,Homepage SAA,,Notification button,Panel open,,Authenticated user,,"1. Click notification",Notification panel opens,,High,Normal_Others
+FUNCTION,ID-28,Homepage SAA,,,Badge display,,Authenticated with unread,,"1. Observe notification badge",Red badge visible,,Medium,Normal_Others
+FUNCTION,ID-29,Homepage SAA,,,,,No unread notifications,,"1. Observe notification",No badge,,Medium,Normal_Others
+FUNCTION,ID-30,Homepage SAA,,Dropdown menu,Toggle,,User on homepage,,"1. Click dropdown",Menu opens,,Medium,Normal_Others
+FUNCTION,ID-31,Homepage SAA,,,,,Menu open,,"1. Click again",Menu closes,,Medium,Normal_Others
+FUNCTION,ID-32,Homepage SAA,,,,,Menu open,,"1. Click outside",Menu closes,,Medium,Normal_Others
+FUNCTION,ID-33,Homepage SAA,,,Keyboard nav,,Menu focused,Keyboard,"1. Tab; 2. Enter",Menu opens,,Medium,Normal_Others
+FUNCTION,ID-34,Homepage SAA,,,,,Menu focused,Keyboard,"1. Space",Menu opens,,Medium,Normal_Others
+FUNCTION,ID-35,Homepage SAA,,,,,Menu open,Keyboard,"1. Esc",Menu closes,,Medium,Normal_Others
+FUNCTION,ID-36,Homepage SAA,,User account button,Menu display,,Authenticated,,"1. Click account",Profile/Sign out menu,,High,Normal_Others
+FUNCTION,ID-37,Homepage SAA,,,Role-based,,Admin,,"1. Click account",Profile/Sign out/Admin Dashboard,,High,Normal_Others
+FUNCTION,ID-38,Homepage SAA,,,,,Regular user,,"1. Click account",Profile/Sign out only,,High,Normal_Others
+FUNCTION,ID-39,Homepage SAA,,Countdown,Auto update,,User on homepage,,"1. Wait 1 min",Minutes decreases by 1,,High,Normal_Others
+FUNCTION,ID-40,Homepage SAA,,,,,Single-digit values,,"1. Observe format",0-padded (e.g. 05 09),,Medium,Normal_Others
+FUNCTION,ID-41,Homepage SAA,,,Zero state,,Event start reached,,"1. Observe",00 00 00; Coming soon hidden,,High,Normal_Others
+FUNCTION,ID-42,Homepage SAA,,Coming soon label,Visibility,,After event start,,"1. Observe",Coming soon not displayed,,High,Normal_Others
+FUNCTION,ID-43,Homepage SAA,,,,,Before event start,,"1. Observe",Coming soon displayed,,High,Normal_Others
+FUNCTION,ID-44,Homepage SAA,,CTA buttons,Navigation,,User on homepage,,"1. Click ABOUT AWARDS",Navigates to Awards Information,,High,Normal_Others
+FUNCTION,ID-45,Homepage SAA,,,,,User on homepage,,"1. Click ABOUT KUDOS",Navigates to Sun* Kudos,,High,Normal_Others
+FUNCTION,ID-46,Homepage SAA,,,Hover state,,User on homepage,,"1. Hover ABOUT AWARDS",Hover styling visible,,Medium,Normal_Others
+FUNCTION,ID-47,Homepage SAA,,Award cards,Click navigation,,Top Talent,,"1. Click Top Talent image",Awards Information #top-talent,,High,Normal_Others
+FUNCTION,ID-48,Homepage SAA,,,,,Top Talent,,"1. Click Top Talent title",Awards Information #top-talent,,High,Normal_Others
+FUNCTION,ID-49,Homepage SAA,,,,,Top Talent,,"1. Click Chi tiết",Awards Information #top-talent,,High,Normal_Others
+FUNCTION,ID-50,Homepage SAA,,,,,All cards,,"1. Click each card",Each navigates with appropriate hashtag,,High,Normal_Others
+FUNCTION,ID-51,Homepage SAA,,,Hover effect,,User on homepage,,"1. Hover card",Card elevates with border/lighting,,Medium,Normal_Others
+FUNCTION,ID-52,Homepage SAA,,,Hashtag navigation,,Card with hashtag,,"1. Click card",Page scrolls to section matching slug,,High,Normal_Others
+FUNCTION,ID-53,Homepage SAA,,Sun* Kudos section,Detail button,,User on homepage,,"1. Click Chi tiết",Navigates to Sun* Kudos detail,,High,Normal_Others
+FUNCTION,ID-54,Homepage SAA,,Widget button,Quick action menu,,User on homepage,,"1. Click widget",Quick action menu opens,,Medium,Normal_Others
+FUNCTION,ID-55,Homepage SAA,,Footer links,Navigation,,Scrolled to footer,,"1. Click each link",Navigates correctly,,High,Normal_Others
+FUNCTION,ID-56,Homepage SAA,,Countdown timer,Env var format,,Env var set,ISO-8601,"1. Set env; 2. Open homepage",Countdown displays correct remaining time,,High,Data and Database Integrity
+FUNCTION,ID-57,Homepage SAA,,,ISO-8601 datetime,,Env config,datetime=2025-12-31T18:30:00+07:00,"1. Configure ISO-8601; 2. Restart; 3. Verify",Countdown calculates and displays correctly,,High,Data and Database Integrity
+FUNCTION,ID-58,Homepage SAA,,Language selection,Valid options,,Menu open,,"1. Click language",Only VN and EN displayed,,Medium,Normal_Others
+FUNCTION,ID-59,Homepage SAA,Error handling,Navigation,Broken links,,User on homepage,Check My Links,"1. Run extension",No broken links,,High,Normal_Others
+FUNCTION,ID-60,Homepage SAA,,Countdown timer,Invalid datetime,,Env invalid,datetime=invalid,"1. Set invalid; 2. Restart",Fallback or error without crashing,,Medium,Abnormal_Others
+FUNCTION,ID-62,Homepage SAA,,Award card navigation,Missing hashtag,,Card without hashtag,,"1. Click",Navigates to Awards Information without auto-scroll,,Medium,Abnormal_Others

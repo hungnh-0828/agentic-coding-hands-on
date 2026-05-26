@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "about": "About SAA 2025",
+    "awards": "Awards Information",
+    "kudos": "Sun* Kudos"
+  },
+  "header": {
+    "language": "VN",
+    "languageEN": "EN",
+    "notifications": "Thông báo",
+    "profile": "Profile",
+    "signOut": "Sign out",
+    "adminDashboard": "Admin Dashboard"
+  },
+  "hero": {
+    "title": "ROOT FURTHER",
+    "comingSoon": "Coming soon",
+    "labels": {
+      "days": "DAYS",
+      "hours": "HOURS",
+      "minutes": "MINUTES"
+    },
+    "event": {
+      "timeLabel": "Thời gian:",
+      "timeValue": "18h30",
+      "locationLabel": "Địa điểm:",
+      "locationValue": "Nhà hát nghệ thuật quân đội",
+      "broadcast": "Tường thuật trực tiếp tại Group Facebook Sun* Family"
+    },
+    "ctaAwards": "ABOUT AWARDS",
+    "ctaKudos": "ABOUT KUDOS"
+  },
+  "rootFurther": {
+    "caption": "Tinh thần SAA 2025",
+    "body": "Một mùa giải mới khởi đầu cùng tinh thần \"Root Further\" – cùng đào sâu gốc rễ, gìn giữ giá trị cốt lõi và vươn xa hơn nữa. Mỗi nhân tố, mỗi đội nhóm, mỗi dự án – đều xứng đáng được vinh danh.",
+    "quote": "A tree with deep roots fears no storm"
+  },
+  "awards": {
+    "caption": "Sun* annual awards 2025",
+    "title": "Hệ thống giải thưởng",
+    "subtitle": "Các hạng mục sẽ được trao giải theo TOP những người xuất sắc nhất.",
+    "detailLink": "Chi tiết"
+  },
+  "kudos": {
+    "label": "Phong trào ghi nhận",
+    "title": "Sun* Kudos",
+    "description": "Một sân chơi mới, nơi mọi người ghi nhận và lan tỏa giá trị của nhau mỗi ngày – nhỏ thôi nhưng thật.",
+    "cta": "Chi tiết"
+  },
+  "footer": {
+    "copyright": "Bản quyền thuộc về Sun* © 2025"
+  },
+  "widget": {
+    "nominate": "Đề cử nhanh",
+    "sendKudos": "Gửi Kudos",
+    "contactOrganizer": "Liên hệ ban tổ chức"
+  },
+  "notifications": {
+    "unread": "{count} chưa đọc",
+    "empty": "Bạn không có thông báo mới."
+  },
+  "login": {
+    "title": "Đăng nhập"
+  },
+  "common": {
+    "comingSoon": "Coming soon..."
+  }
+}
