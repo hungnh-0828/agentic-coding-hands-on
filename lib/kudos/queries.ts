@@ -12,7 +12,7 @@ import type {
 type UserRow      = { id: string; display_name: string | null; department_id: string | null };
 type DeptRow      = { id: string; slug: string; name: string };
 type HashtagRow   = { id: string; slug: string; label: string };
-type KudosRow     = { id: string; sender_id: string; receiver_id: string; content: string; created_at: string };
+type KudosRow     = { id: string; sender_id: string; receiver_id: string; title: string; content: string; created_at: string; is_anonymous: boolean; anonymous_name: string | null };
 type KudosHashRow = { kudos_id: string; hashtag_id: string };
 type LikeRow      = { kudos_id: string; user_id: string; weight: number };
 
@@ -22,6 +22,7 @@ const EMPTY: KudosBoardData = {
   departments: [],
   totalKudos: 0,
   receiverNames: [],
+  people: [],
 };
 
 // Fetches everything needed for the live board in one call.
@@ -33,7 +34,7 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
       supabase.from("users").select("id, display_name, department_id"),
       supabase.from("departments").select("id, slug, name"),
       supabase.from("hashtags").select("id, slug, label"),
-      supabase.from("kudos").select("id, sender_id, receiver_id, content, created_at"),
+      supabase.from("kudos").select("id, sender_id, receiver_id, title, content, created_at, is_anonymous, anonymous_name"),
       supabase.from("kudos_hashtags").select("kudos_id, hashtag_id"),
       supabase.from("kudos_likes").select("kudos_id, user_id, weight"),
     ]);
@@ -90,10 +91,13 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
           id: k.id,
           sender,
           receiver,
+          title: k.title ?? "",
           content: k.content,
           createdAt: k.created_at,
           hashtags: hashByKudos.get(k.id) ?? [],
           likes: likesByKudos.get(k.id) ?? [],
+          isAnonymous: k.is_anonymous ?? false,
+          anonymousName: k.anonymous_name ?? null,
         };
       })
       .filter((k): k is KudosPost => k !== null)
@@ -105,6 +109,8 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
       departments: departments.map((d) => ({ slug: d.slug, name: d.name })),
       totalKudos: kudos.length,
       receiverNames: Array.from(new Set(kudos.map((k) => k.receiver.name))),
+      // All Sunners; UI excludes the sender when building the recipient picker.
+      people: Array.from(userById.values()),
     };
   } catch {
     return EMPTY;

@@ -41,7 +41,7 @@
     "subtitle": "Categories awarded to the TOP of the most outstanding contributors.",
     "detailLink": "Details"
   },
-  "kudos": {
+  "kudosSection": {
     "label": "Recognition movement",
     "title": "Sun* Kudos",
     "description": "A new space where everyone recognizes and amplifies each other's value daily — small but real.",
@@ -119,7 +119,8 @@
       "sentTo": "sent to",
       "likeAria": "Like — current {count}",
       "carouselPrev": "Previous slide",
-      "carouselNext": "Next slide"
+      "carouselNext": "Next slide",
+      "anonymous": "Anonymous"
     },
     "sidebar": {
       "received": "Kudos you received",
@@ -132,7 +133,31 @@
       "recentPrizes": "10 LATEST PRIZE RECIPIENTS",
       "empty": "No data yet"
     },
-    "todoToast": "Feature in progress"
+    "todoToast": "Feature in progress",
+    "compose": {
+      "modalTitle": "Send thanks and recognition to your teammate",
+      "recipientLabel": "Recipient",
+      "recipientPlaceholder": "Search",
+      "titleLabel": "Award title",
+      "titlePlaceholder": "Give your teammate a special title",
+      "titleHint1": "Example: The one who motivates me.",
+      "titleHint2": "This title will appear as the heading of your Kudos.",
+      "editorPlaceholder": "Share your thanks and recognition with your teammate here!",
+      "editorMentionHint": "You can use \"@ + name\" to mention another colleague",
+      "communityStandards": "Community standards",
+      "hashtagLabel": "Hashtag",
+      "hashtagAdd": "Hashtag",
+      "hashtagMax": "Max 5",
+      "imageLabel": "Image",
+      "imageAdd": "Image",
+      "imageMax": "Max 5",
+      "anonymousLabel": "Send thanks and recognition anonymously",
+      "anonymousNamePlaceholder": "Anonymous display name",
+      "cancel": "Cancel",
+      "submit": "Send",
+      "successToast": "Your kudos has been sent!",
+      "errorToast": "Couldn't send, please try again."
+    }
   },
   "common": {
     "comingSoon": "Coming soon..."

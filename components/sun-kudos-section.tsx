@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 
 export function SunKudosSection() {
-  const t = useTranslations("kudos");
+  const t = useTranslations("kudosSection");
   return (
     <section className="mx-auto w-full max-w-7xl px-6 py-24">
       <div className="grid gap-10 overflow-hidden rounded-3xl bg-gradient-to-br from-saa-bg-elev to-saa-bg p-10 ring-1 ring-white/5 md:grid-cols-2 md:p-16">

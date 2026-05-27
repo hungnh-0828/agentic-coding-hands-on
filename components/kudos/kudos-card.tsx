@@ -31,6 +31,10 @@ function PersonBlock({ name, dept }: { name: string; dept: string | null }) {
 export function KudosCard({ kudos, variant = "feed" }: { kudos: KudosPost; variant?: "feed" | "highlight" }) {
   const t = useTranslations("kudos.card");
 
+  // Anonymous kudos hide the real sender identity behind the chosen display name.
+  const senderName = kudos.isAnonymous ? kudos.anonymousName || t("anonymous") : kudos.sender.name;
+  const senderDept = kudos.isAnonymous ? null : kudos.sender.departmentName;
+
   return (
     <article
       id={`kudos-${kudos.id}`}
@@ -40,7 +44,7 @@ export function KudosCard({ kudos, variant = "feed" }: { kudos: KudosPost; varia
     >
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3">
-          <PersonBlock name={kudos.sender.name} dept={kudos.sender.departmentName} />
+          <PersonBlock name={senderName} dept={senderDept} />
           <svg viewBox="0 0 24 24" className="h-4 w-4 text-saa-muted" fill="none" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
           </svg>
@@ -48,6 +52,7 @@ export function KudosCard({ kudos, variant = "feed" }: { kudos: KudosPost; varia
         </div>
         <time className="text-xs text-saa-muted">{formatTimestamp(kudos.createdAt)}</time>
       </header>
+      {kudos.title && <h3 className="text-base font-bold text-saa-accent">{kudos.title}</h3>}
       <p className={`text-sm leading-relaxed text-saa-text/90 ${variant === "feed" ? "line-clamp-5" : "line-clamp-3"}`}>
         {kudos.content}
       </p>

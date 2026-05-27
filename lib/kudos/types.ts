@@ -19,10 +19,14 @@ export type KudosPost = {
   id: string;
   sender: KudosPerson;
   receiver: KudosPerson;
+  title: string;
   content: string;
   createdAt: string;
   hashtags: KudosHashtag[];
   likes: KudosLike[];
+  // When true, the sender identity is hidden on the board in favour of anonymousName.
+  isAnonymous: boolean;
+  anonymousName: string | null;
 };
 
 export type KudosBoardData = {
@@ -31,6 +35,18 @@ export type KudosBoardData = {
   departments: { slug: string; name: string }[];
   totalKudos: number;
   receiverNames: string[];
+  // All Sunners — UI excludes the sender when building recipient picker.
+  people: KudosPerson[];
+};
+
+export type CreateKudosInput = {
+  receiverId: string;
+  title: string;
+  content: string;
+  hashtagSlugs: string[];   // 1..5
+  imageUrls: string[];      // 0..5 data URLs
+  isAnonymous: boolean;
+  anonymousName: string | null;
 };
 
 export type KudosUserStats = {

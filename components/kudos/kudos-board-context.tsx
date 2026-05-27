@@ -57,6 +57,14 @@ export function KudosBoardProvider({
     : null;
 
   const [kudos, setKudos] = useState<KudosPost[]>(data.kudos);
+  // Re-sync from the server after a revalidation (e.g. router.refresh() once a new
+  // kudos is created). React's "adjust state while rendering" pattern — preferred
+  // over an effect — so freshly inserted posts surface without cascading renders.
+  const [syncedKudos, setSyncedKudos] = useState(data.kudos);
+  if (syncedKudos !== data.kudos) {
+    setSyncedKudos(data.kudos);
+    setKudos(data.kudos);
+  }
   const [selectedHashtag, setSelectedHashtag] = useState<string | null>(null);
   const [selectedDept, setSelectedDept] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
