@@ -41,7 +41,7 @@
     "subtitle": "Các hạng mục sẽ được trao giải theo TOP những người xuất sắc nhất.",
     "detailLink": "Chi tiết"
   },
-  "kudos": {
+  "kudosSection": {
     "label": "Phong trào ghi nhận",
     "title": "Sun* Kudos",
     "description": "Một sân chơi mới, nơi mọi người ghi nhận và lan tỏa giá trị của nhau mỗi ngày – nhỏ thôi nhưng thật.",
@@ -119,7 +119,8 @@
       "sentTo": "đã gửi đến",
       "likeAria": "Thả tim — hiện {count}",
       "carouselPrev": "Slide trước",
-      "carouselNext": "Slide kế"
+      "carouselNext": "Slide kế",
+      "anonymous": "Ẩn danh"
     },
     "sidebar": {
       "received": "Số Kudos bạn nhận được",
@@ -132,7 +133,31 @@
       "recentPrizes": "10 SUNNER NHẬN QUÀ MỚI NHẤT",
       "empty": "Chưa có dữ liệu"
     },
-    "todoToast": "Tính năng đang phát triển"
+    "todoToast": "Tính năng đang phát triển",
+    "compose": {
+      "modalTitle": "Gửi lời cám ơn và ghi nhận đến đồng đội",
+      "recipientLabel": "Người nhận",
+      "recipientPlaceholder": "Tìm kiếm",
+      "titleLabel": "Danh hiệu",
+      "titlePlaceholder": "Dành tặng một danh hiệu cho đồng đội",
+      "titleHint1": "Ví dụ: Người truyền động lực cho tôi.",
+      "titleHint2": "Danh hiệu sẽ hiển thị làm tiêu đề Kudos của bạn.",
+      "editorPlaceholder": "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
+      "editorMentionHint": "Bạn có thể \"@ + tên\" để nhắc tới đồng nghiệp khác",
+      "communityStandards": "Tiêu chuẩn cộng đồng",
+      "hashtagLabel": "Hashtag",
+      "hashtagAdd": "Hashtag",
+      "hashtagMax": "Tối đa 5",
+      "imageLabel": "Image",
+      "imageAdd": "Image",
+      "imageMax": "Tối đa 5",
+      "anonymousLabel": "Gửi lời cám ơn và ghi nhận ẩn danh",
+      "anonymousNamePlaceholder": "Tên hiển thị ẩn danh",
+      "cancel": "Hủy",
+      "submit": "Gửi",
+      "successToast": "Đã gửi lời cám ơn và ghi nhận!",
+      "errorToast": "Không thể gửi, vui lòng thử lại."
+    }
   },
   "common": {
     "comingSoon": "Coming soon..."

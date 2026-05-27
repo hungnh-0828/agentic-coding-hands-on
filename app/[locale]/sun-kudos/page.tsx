@@ -7,6 +7,8 @@ import { AuthGuard } from "@/lib/auth/auth-guard";
 import { fetchKudosBoard, fetchKudosStats } from "@/lib/kudos/queries";
 
 import { KudosBoardProvider } from "@/components/kudos/kudos-board-context";
+import { ComposeModalProvider } from "@/components/kudos/compose/compose-modal-context";
+import { ComposeKudoModal } from "@/components/kudos/compose/compose-kudo-modal";
 import { KudosBanner } from "@/components/kudos/kudos-banner";
 import { SendKudosInput } from "@/components/kudos/send-kudos-input";
 import { HighlightSection } from "@/components/kudos/highlight-section";
@@ -48,21 +50,28 @@ export default async function SunKudosPage({
       <main className="flex-1">
         <AuthGuard>
           <KudosBoardProvider data={board}>
-            <KudosBanner />
-            <div className="mx-auto w-full max-w-6xl px-6 pt-12">
-              <SendKudosInput />
-            </div>
-            <HighlightSection />
-            <SpotlightBoard />
-            <div className="mx-auto w-full max-w-7xl px-6">
-              <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
-                <AllKudosSection />
-                <div className="lg:pt-16">
-                  <KudosSidebar stats={stats} />
+            <ComposeModalProvider>
+              <KudosBanner />
+              <div className="mx-auto w-full max-w-6xl px-6 pt-12">
+                <SendKudosInput />
+              </div>
+              <HighlightSection />
+              <SpotlightBoard />
+              <div className="mx-auto w-full max-w-7xl px-6">
+                <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
+                  <AllKudosSection />
+                  <div className="lg:pt-16">
+                    <KudosSidebar stats={stats} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <KudosToast />
+              <KudosToast />
+              {/* Compose modal: recipient list excludes the demo sender (sender_not_receiver). */}
+              <ComposeKudoModal
+                people={board.people.filter((p) => p.id !== DEMO_STATS_USER_ID)}
+                hashtags={board.hashtags}
+              />
+            </ComposeModalProvider>
           </KudosBoardProvider>
         </AuthGuard>
       </main>
