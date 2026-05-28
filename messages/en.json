@@ -61,9 +61,9 @@
   },
   "login": {
     "title": "Sign in",
-    "welcomeLine1": "Begin your journey with SAA 2025.",
+    "welcomeLine1": "Start your journey with SAA 2025.",
     "welcomeLine2": "Sign in to explore!",
-    "googleCta": "Sign in with Google",
+    "googleCta": "LOGIN With Google",
     "loading": "Signing in...",
     "alreadyAuthed": "You are already signed in. Redirecting..."
   },
