@@ -51,19 +51,69 @@ export function CountdownTimer({ eventISO, variant = "hero", tone = "accent" }: 
   ];
 
   if (variant === "led") {
+    // Homepage hero keeps the lighter, monospace digit treatment.
+    if (tone === "light") {
+      return (
+        <div className="flex flex-wrap items-start justify-center gap-6 sm:gap-10">
+          {units.map((unit) => {
+            const display = ready ? pad(unit.value) : "--";
+            return (
+              <div
+                key={unit.label}
+                role="group"
+                aria-label={`${display} ${unit.label}`}
+                className="flex flex-col items-center"
+              >
+                <LedDigitPair value={display} />
+                <span className="mt-4 text-sm font-bold uppercase tracking-[0.4em] text-saa-text">
+                  {unit.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // Prelaunch page — frosted-glass plates + 7-segment LED font per Figma design.
     return (
-      <div className="flex flex-wrap items-start justify-center gap-6 sm:gap-10">
+      <div className="flex flex-wrap items-start justify-center gap-x-[60px] gap-y-8">
         {units.map((unit) => {
           const display = ready ? pad(unit.value) : "--";
+          const [tens, ones] = display.split("");
           return (
             <div
               key={unit.label}
               role="group"
               aria-label={`${display} ${unit.label}`}
-              className="flex flex-col items-center"
+              className="flex flex-col items-start"
             >
-              <LedDigitPair value={display} tone={tone} />
-              <span className="mt-4 text-sm font-bold uppercase tracking-[0.4em] text-saa-text">
+              <div className="flex gap-[21px]" aria-hidden>
+                {(
+                  [
+                    { key: "tens", digit: tens },
+                    { key: "ones", digit: ones },
+                  ] as const
+                ).map(({ key, digit }) => (
+                  <span
+                    key={key}
+                    className="relative inline-flex h-[123px] w-[77px] items-center justify-center"
+                  >
+                    {/* Frosted-glass plate sits behind the digit at 50% opacity. */}
+                    <span
+                      className="absolute inset-0 rounded-xl border-[0.75px] border-saa-accent-soft opacity-50 backdrop-blur-[25px]"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.10) 100%)",
+                      }}
+                    />
+                    <span className="relative font-led text-[74px] leading-none text-white">
+                      {digit}
+                    </span>
+                  </span>
+                ))}
+              </div>
+              <span className="mt-3 font-montserrat text-2xl font-bold uppercase text-white">
                 {unit.label}
               </span>
             </div>
@@ -88,14 +138,10 @@ export function CountdownTimer({ eventISO, variant = "hero", tone = "accent" }: 
   );
 }
 
-// LED variant renders each digit in its own dark frame ("LED-style digit boxes" per design spec).
+// Homepage hero LED treatment: each digit in its own light frame.
 // Caller must pass a 2-character string ("00".."99" or "--"); we do not pad here.
-function LedDigitPair({ value, tone = "accent" }: { value: string; tone?: Tone }) {
+function LedDigitPair({ value }: { value: string }) {
   const [tens, ones] = value.split("");
-  const box =
-    tone === "light"
-      ? "border-white/15 bg-white/5 text-white"
-      : "border-saa-border bg-saa-bg-elev text-saa-accent";
   return (
     <div className="flex gap-2" aria-hidden>
       {([
@@ -104,7 +150,7 @@ function LedDigitPair({ value, tone = "accent" }: { value: string; tone?: Tone }
       ] as const).map(({ key, digit }) => (
         <span
           key={key}
-          className={`inline-flex h-20 w-16 items-center justify-center rounded-lg border font-mono text-5xl font-bold shadow-inner sm:h-24 sm:w-[72px] sm:text-6xl ${box}`}
+          className="inline-flex h-20 w-16 items-center justify-center rounded-lg border border-white/15 bg-white/5 font-mono text-5xl font-bold text-white shadow-inner sm:h-24 sm:w-[72px] sm:text-6xl"
         >
           {digit}
         </span>
