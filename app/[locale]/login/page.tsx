@@ -23,36 +23,46 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
   const tFooter = await getTranslations({ locale, namespace: "footer" });
 
   return (
-    <div className="relative isolate flex min-h-screen flex-col text-white">
-      {/* Full-bleed keyvisual layered behind everything. The image bakes in some baked-on
-          foreground (logo/headline/button) on its left half, so we mask the left band with
-          a solid dark navy → transparent gradient. Live components sit in front of the mask. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#00101A] text-white">
+      {/* Full-bleed keyvisual — spans the FULL viewport width (not capped to the content frame).
+          Sized to its native 1440×1024 and scaled to 100% width so it grows with the screen
+          edge-to-edge at its natural proportions (no object-cover over-zoom). The navy page
+          background fills any area below the image on very tall viewports.
+          NOTE: this PNG is a flattened export of the whole screen — the headline/text/button are
+          baked onto its left ~46%, and the clean background-only art is not retrievable via the
+          MoMorph MCP. So the live components must cover that band: the navy left-mask stays opaque
+          across the baked foreground, then fades over the art. The bottom gradient darkens the
+          lower band for readability (design Cover layer). */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         <Image
           src="/login/login-keyvisual.png"
           alt=""
-          fill
+          width={1440}
+          height={1024}
           priority
           sizes="100vw"
-          className="object-cover object-right"
+          className="absolute inset-x-0 top-0 h-auto w-full"
         />
-        <div
-          className="absolute inset-0 bg-[linear-gradient(to_right,#00101A_0%,#00101A_38%,rgba(0,16,26,0.85)_50%,rgba(0,16,26,0)_70%)]"
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#00101A_0%,#00101A_46%,rgba(0,16,26,0.6)_58%,rgba(0,16,26,0)_75%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,#00101A_22.48%,rgba(0,19,32,0)_51.74%)]" />
       </div>
 
+      {/* Header bar spans the FULL viewport width so it covers the keyvisual's baked-in header
+          (logo + language switcher + chevron) across the side gutters on screens wider than 1440 —
+          its inner content stays aligned to the 1440 frame. */}
       <LoginHeader locale={locale} />
 
-      <main className="relative flex flex-1 items-center px-10 pt-32 pb-24 md:px-20">
-        <div className="flex w-full max-w-lg flex-col">
+      {/* Content frame — constrained to the 1440 design width and centered. */}
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col">
+        <main className="relative flex flex-1 flex-col items-start justify-center px-6 sm:px-10 lg:px-36">
           <LoginHero />
           <LoginForm />
-        </div>
-      </main>
+        </main>
 
-      <footer className="relative border-t border-white/5 py-6 text-center text-xs text-white/60">
-        {tFooter("copyright")}
-      </footer>
+        <footer className="relative py-6 text-center text-xs text-white/60">
+          {tFooter("copyright")}
+        </footer>
+      </div>
     </div>
   );
 }

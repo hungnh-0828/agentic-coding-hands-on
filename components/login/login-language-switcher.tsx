@@ -6,10 +6,10 @@ import { useState } from "react";
 import { useRouter, usePathname } from "@/lib/i18n/navigation";
 import { routing } from "@/lib/i18n/routing";
 
-// Flag asset per locale. EN reuses VN flag as visual stub until an EN flag is provided.
+// Flag asset per locale.
 const FLAG_SRC: Record<string, string> = {
   vi: "/login/flag-vn.svg",
-  en: "/login/flag-vn.svg",
+  en: "/login/flag-en.svg",
 };
 
 export function LoginLanguageSwitcher({ locale }: { locale: string }) {

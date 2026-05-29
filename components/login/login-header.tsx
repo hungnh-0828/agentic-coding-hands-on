@@ -7,8 +7,8 @@ import { LoginLanguageSwitcher } from "@/components/login/login-language-switche
 // No nav, no notifications, no account menu — per design A.
 export function LoginHeader({ locale }: { locale: string }) {
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <div className="flex h-20 w-full items-center justify-between px-10 md:px-20">
+    <header className="absolute inset-x-0 top-0 z-50 bg-[#0B0F12]/80 shadow-[0_2px_24px_rgba(0,0,0,0.45)] backdrop-blur-md">
+      <div className="mx-auto flex h-20 w-full max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-36">
         <Link href="/" aria-label="Sun* Annual Awards 2025 — Home" className="inline-flex">
           <Image
             src="/login/sun-annual-awards-logo.png"

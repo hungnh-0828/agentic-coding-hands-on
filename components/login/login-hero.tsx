@@ -13,7 +13,7 @@ export function LoginHero() {
         priority
         className="h-auto w-[280px] sm:w-[380px] md:w-[450px]"
       />
-      <p className="mt-12 max-w-md text-sm font-semibold leading-7 text-white sm:text-base">
+      <p className="mt-20 ml-4 max-w-[496px] text-sm font-semibold leading-7 text-white sm:text-base">
         {t("welcomeLine1")}
         <br />
         {t("welcomeLine2")}
