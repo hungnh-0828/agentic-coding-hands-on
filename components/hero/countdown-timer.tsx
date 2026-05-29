@@ -6,7 +6,8 @@ import { useTranslations } from "next-intl";
 import { FALLBACK_EVENT_ISO } from "@/lib/event";
 
 type Variant = "hero" | "led";
-type Props = { eventISO: string; variant?: Variant };
+type Tone = "accent" | "light";
+type Props = { eventISO: string; variant?: Variant; tone?: Tone };
 
 function diff(now: number, target: number) {
   const ms = Math.max(0, target - now);
@@ -21,7 +22,7 @@ function diff(now: number, target: number) {
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-export function CountdownTimer({ eventISO, variant = "hero" }: Props) {
+export function CountdownTimer({ eventISO, variant = "hero", tone = "accent" }: Props) {
   // Unit labels (DAYS/HOURS/MINUTES) are shared with the homepage hero — same i18n namespace.
   const t = useTranslations("hero.labels");
   const target = useMemo(() => {
@@ -61,7 +62,7 @@ export function CountdownTimer({ eventISO, variant = "hero" }: Props) {
               aria-label={`${display} ${unit.label}`}
               className="flex flex-col items-center"
             >
-              <LedDigitPair value={display} />
+              <LedDigitPair value={display} tone={tone} />
               <span className="mt-4 text-sm font-bold uppercase tracking-[0.4em] text-saa-text">
                 {unit.label}
               </span>
@@ -89,8 +90,12 @@ export function CountdownTimer({ eventISO, variant = "hero" }: Props) {
 
 // LED variant renders each digit in its own dark frame ("LED-style digit boxes" per design spec).
 // Caller must pass a 2-character string ("00".."99" or "--"); we do not pad here.
-function LedDigitPair({ value }: { value: string }) {
+function LedDigitPair({ value, tone = "accent" }: { value: string; tone?: Tone }) {
   const [tens, ones] = value.split("");
+  const box =
+    tone === "light"
+      ? "border-white/15 bg-white/5 text-white"
+      : "border-saa-border bg-saa-bg-elev text-saa-accent";
   return (
     <div className="flex gap-2" aria-hidden>
       {([
@@ -99,7 +104,7 @@ function LedDigitPair({ value }: { value: string }) {
       ] as const).map(({ key, digit }) => (
         <span
           key={key}
-          className="inline-flex h-20 w-16 items-center justify-center rounded-lg border border-saa-border bg-saa-bg-elev font-mono text-5xl font-bold text-saa-accent shadow-inner sm:h-28 sm:w-20 sm:text-7xl"
+          className={`inline-flex h-20 w-16 items-center justify-center rounded-lg border font-mono text-5xl font-bold shadow-inner sm:h-24 sm:w-[72px] sm:text-6xl ${box}`}
         >
           {digit}
         </span>

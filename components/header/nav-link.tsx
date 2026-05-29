@@ -8,7 +8,7 @@ type Props = {
 
 export function NavLink({ href, children, selected = false }: Props) {
   const base =
-    "rounded px-3 py-2 text-sm font-medium uppercase tracking-wide transition-colors";
+    "px-1 py-2 text-base font-medium transition-colors";
   const state = selected
     ? "text-saa-accent underline decoration-saa-accent decoration-2 underline-offset-8"
     : "text-saa-text/85 hover:text-saa-bg hover:bg-saa-accent";

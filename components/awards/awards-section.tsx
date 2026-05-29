@@ -40,13 +40,15 @@ export async function AwardsSection() {
   const awards = await fetchAwards();
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 py-24">
-      <div className="text-center">
-        <p className="text-xs uppercase tracking-[0.4em] text-saa-accent">{t("caption")}</p>
-        <h2 className="mt-3 text-3xl font-bold text-saa-text sm:text-4xl">{t("title")}</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-saa-muted">{t("subtitle")}</p>
+    <section className="mx-auto w-full max-w-7xl px-6 py-20 sm:py-24">
+      <div>
+        <p className="border-b border-white/10 pb-4 text-sm font-medium text-saa-text/70">
+          {t("caption")}
+        </p>
+        <h2 className="mt-6 text-4xl font-extrabold text-saa-accent sm:text-5xl">{t("title")}</h2>
+        <p className="mt-3 max-w-2xl text-saa-muted">{t("subtitle")}</p>
       </div>
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {awards.map((a) => (
           <AwardCard key={a.id} slug={a.slug} title={a.title} description={a.description} />
         ))}

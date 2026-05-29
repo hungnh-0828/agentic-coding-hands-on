@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -27,13 +28,13 @@ export function WidgetButton() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label="Quick actions"
-        className="inline-flex h-16 w-[105px] items-center justify-center gap-2 rounded-full bg-saa-accent px-3 text-saa-bg shadow-lg hover:bg-saa-accent-soft"
+        className="inline-flex h-16 w-[105px] items-center justify-center gap-1.5 rounded-full bg-saa-accent-soft px-3 text-saa-bg shadow-lg hover:bg-saa-accent"
       >
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M11 5h2M5 11h2m10 0h2M11 17h2M7.05 7.05l1.41 1.41m7.08 7.08l1.41 1.41M7.05 16.95l1.41-1.41m7.08-7.08l1.41-1.41" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
         </svg>
-        <span className="font-black">/</span>
-        <span className="text-xs font-black">SAA</span>
+        <span className="text-lg font-black">/</span>
+        <Image src="/login/sun-annual-awards-logo.png" alt="SAA" width={28} height={26} className="h-6 w-auto" />
       </button>
     </div>
   );

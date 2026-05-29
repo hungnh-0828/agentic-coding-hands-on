@@ -31,9 +31,17 @@
     "ctaKudos": "ABOUT KUDOS"
   },
   "rootFurther": {
-    "caption": "The spirit of SAA 2025",
-    "body": "A new season begins with the \"Root Further\" spirit – deepen the roots, hold the core values, and reach further. Every contributor, every team, every project deserves to be honored.",
-    "quote": "A tree with deep roots fears no storm"
+    "intro": [
+      "Facing the storm-like changes of the AI era and ever-higher expectations from clients, Sun* has chosen a strategy of diversifying capabilities — not only to become a leader in its field, but to aim even higher, toward a future where every Sunner is a “problem-solver”, an expert in resolving every challenge and finding answers for every project, client, and society.",
+      "Inspired by this diversity of capability, the ability to grow flexibly, and the spirit of digging deep to break through in the AI era, “Root Further” was chosen as the official theme of the Sun* Annual Awards 2025.",
+      "Beyond its surface meaning, “Root Further” is the journey of continually reaching farther and rooting deeper — touching the hidden “geological” layers to keep surviving, rising, and nurturing the ever-burning passion of Sun* people to create value. Like roots that relentlessly drive into the earth, weaving through every layer of “sediment” to absorb what is purest, Sun* people are also “absorbing” nutrients from the era and the market's challenges to renew themselves every day, expand their capabilities, and root firmly into the AI era — an entirely new, complex, and unpredictable “geological” layer, yet one brimming with potential and opportunity."
+    ],
+    "quote": "“A tree with deep roots fears no storm”",
+    "quoteSource": "(English proverb)",
+    "outro": [
+      "In a storm, only trees with strong enough roots can stand firm. An organization of individuals confident in their diverse capabilities, ready to create and embrace challenges, and in command of change, is one that not only stands steady amid turbulence but also seizes every advantage and conquers the challenges of the times. More than the name of a new chapter in our growth, “Root Further” is an encouragement for each of us to dare to believe in ourselves, dig deeper, unlock every potential, break our limits, and become the most versatile, outstanding version of ourselves. In the AI era, diverse capability and harnessing the strength of the times are the prerequisites to endure.",
+      "No one can foresee how many mysterious “geological” layers lie hidden deep in the “earth” of modern technology and markets. We only know that once “Root Further” becomes our rooted spirit, we will feel no fear — only excitement before any uncharted territory on the road ahead. Because we always believe that within those boundless realms await countless wonders and chances to rise."
+    ]
   },
   "awards": {
     "caption": "Sun* annual awards 2025",
@@ -44,10 +52,12 @@
   "kudosSection": {
     "label": "Recognition movement",
     "title": "Sun* Kudos",
-    "description": "A new space where everyone recognizes and amplifies each other's value daily — small but real.",
+    "eyebrow": "NEW IN SAA 2025",
+    "description": "A peer recognition and thank-you initiative — held for the first time for all Sunners. Launching in November 2025, it encourages Sun* people to share recognition and thanks for colleagues on the system announced by the organizers. These will serve as reference material for the Heads Council during the selection of award winners.",
     "cta": "Details"
   },
   "footer": {
+    "standards": "General standards",
     "copyright": "Copyright © Sun* 2025"
   },
   "widget": {
