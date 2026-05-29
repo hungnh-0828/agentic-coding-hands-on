@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 
+import { heroRankFromReceived } from "./hero-badge";
 import type {
   KudosBoardData,
   KudosHashtag,
@@ -9,10 +10,10 @@ import type {
   KudosUserStats,
 } from "./types";
 
-type UserRow      = { id: string; display_name: string | null; department_id: string | null };
+type UserRow      = { id: string; display_name: string | null; department_id: string | null; avatar_url: string | null };
 type DeptRow      = { id: string; slug: string; name: string };
 type HashtagRow   = { id: string; slug: string; label: string };
-type KudosRow     = { id: string; sender_id: string; receiver_id: string; title: string; content: string; created_at: string; is_anonymous: boolean; anonymous_name: string | null };
+type KudosRow     = { id: string; sender_id: string; receiver_id: string; title: string; content: string; created_at: string; is_anonymous: boolean; anonymous_name: string | null; image_urls: string[] | null };
 type KudosHashRow = { kudos_id: string; hashtag_id: string };
 type LikeRow      = { kudos_id: string; user_id: string; weight: number };
 
@@ -31,10 +32,10 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
   try {
     const supabase = await createClient();
     const [usersRes, deptRes, hashRes, kudosRes, linkRes, likeRes] = await Promise.all([
-      supabase.from("users").select("id, display_name, department_id"),
+      supabase.from("users").select("id, display_name, department_id, avatar_url"),
       supabase.from("departments").select("id, slug, name"),
       supabase.from("hashtags").select("id, slug, label"),
-      supabase.from("kudos").select("id, sender_id, receiver_id, title, content, created_at, is_anonymous, anonymous_name"),
+      supabase.from("kudos").select("id, sender_id, receiver_id, title, content, created_at, is_anonymous, anonymous_name, image_urls"),
       supabase.from("kudos_hashtags").select("kudos_id, hashtag_id"),
       supabase.from("kudos_likes").select("kudos_id, user_id, weight"),
     ]);
@@ -50,9 +51,18 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
     const likeRows   = (likeRes.data ?? []) as unknown as LikeRow[];
 
     const deptById = new Map(departments.map((d) => [d.id, d]));
+
+    // Lifetime kudos received per user → hero badge + star count.
+    const receivedCountById = new Map<string, number>();
+    for (const k of kudosRows) {
+      receivedCountById.set(k.receiver_id, (receivedCountById.get(k.receiver_id) ?? 0) + 1);
+    }
+
     const userById = new Map(
       users.map((u): [string, KudosPerson] => {
         const dept = u.department_id ? deptById.get(u.department_id) : null;
+        const receivedCount = receivedCountById.get(u.id) ?? 0;
+        const rank = heroRankFromReceived(receivedCount);
         return [
           u.id,
           {
@@ -60,6 +70,10 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
             name: u.display_name ?? "Sunner",
             departmentSlug: dept?.slug ?? null,
             departmentName: dept?.name ?? null,
+            avatarUrl: u.avatar_url ?? null,
+            receivedCount,
+            starCount: rank.starCount,
+            badge: rank.badge,
           },
         ];
       }),
@@ -94,6 +108,7 @@ export async function fetchKudosBoard(): Promise<KudosBoardData> {
           title: k.title ?? "",
           content: k.content,
           createdAt: k.created_at,
+          imageUrls: k.image_urls ?? [],
           hashtags: hashByKudos.get(k.id) ?? [],
           likes: likesByKudos.get(k.id) ?? [],
           isAnonymous: k.is_anonymous ?? false,

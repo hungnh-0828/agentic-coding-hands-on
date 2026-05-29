@@ -99,7 +99,14 @@
       "title": "The thank-you board"
     },
     "sendInput": {
-      "placeholder": "Who do you want to thank today?"
+      "placeholder": "Who do you want to thank today?",
+      "searchPlaceholder": "Search Sunner profile"
+    },
+    "badge": {
+      "new": "New Hero",
+      "rising": "Rising Hero",
+      "super": "Super Hero",
+      "legend": "Legend Hero"
     },
     "filters": {
       "hashtag": "Hashtag",
@@ -125,6 +132,9 @@
     "card": {
       "copyLink": "Copy Link",
       "viewDetail": "View details",
+      "viewDetailTodo": "Detail page in progress",
+      "edit": "Edit",
+      "editTodo": "Edit feature in progress",
       "copiedToast": "Link copied — ready to share!",
       "sentTo": "sent to",
       "likeAria": "Like — current {count}",
@@ -138,7 +148,7 @@
       "hearts": "Hearts you received",
       "boxOpened": "Secret Boxes opened",
       "boxUnopened": "Secret Boxes unopened",
-      "openBox": "Open box",
+      "openBox": "Open Secret Box",
       "recentRanks": "10 LATEST RANK-UPS",
       "recentPrizes": "10 LATEST PRIZE RECIPIENTS",
       "empty": "No data yet"
