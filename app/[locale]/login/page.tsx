@@ -47,10 +47,13 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
         <div className="absolute inset-0 bg-[linear-gradient(0deg,#00101A_22.48%,rgba(0,19,32,0)_51.74%)]" />
       </div>
 
+      {/* Header bar spans the FULL viewport width so it covers the keyvisual's baked-in header
+          (logo + language switcher + chevron) across the side gutters on screens wider than 1440 —
+          its inner content stays aligned to the 1440 frame. */}
+      <LoginHeader locale={locale} />
+
       {/* Content frame — constrained to the 1440 design width and centered. */}
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col">
-        <LoginHeader locale={locale} />
-
         <main className="relative flex flex-1 flex-col items-start justify-center px-6 sm:px-10 lg:px-36">
           <LoginHero />
           <LoginForm />
