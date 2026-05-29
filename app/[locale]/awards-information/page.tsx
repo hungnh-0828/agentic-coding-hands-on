@@ -18,6 +18,15 @@ type AwardRow = Pick<
   "id" | "slug" | "title" | "description" | "display_order" | "prize_count" | "unit_label" | "prize_value"
 >;
 
+const ORB_BY_SLUG: Record<string, string> = {
+  "top-talent": "/home/orb-top-talent.png",
+  "top-project": "/home/orb-top-project.png",
+  "top-project-leader": "/home/orb-top-project-leader.png",
+  "best-manager": "/home/orb-best-manager.png",
+  "signature-creator": "/home/orb-signature-creator.png",
+  mvp: "/home/orb-mvp.png",
+};
+
 const FALLBACK: AwardRow[] = [
   { id: "1", slug: "top-talent",         title: "Top Talent",                 description: null, display_order: 1, prize_count: 10, unit_label: "Đơn vị",   prize_value: "7.000.000 VNĐ" },
   { id: "2", slug: "top-project",        title: "Top Project",                description: null, display_order: 2, prize_count: 2,  unit_label: "Tập thể",  prize_value: "15.000.000 VNĐ" },
@@ -73,7 +82,7 @@ export default async function AwardsInformationPage({
             <div className="mt-12 grid gap-12 md:grid-cols-[220px_1fr]">
               <AwardsInformationNav items={navItems} />
               <div className="min-w-0">
-                {awards.map((a) => (
+                {awards.map((a, i) => (
                   <AwardDetailBlock
                     key={a.id}
                     slug={a.slug}
@@ -82,6 +91,8 @@ export default async function AwardsInformationPage({
                     prizeCount={a.prize_count}
                     unitLabel={a.unit_label}
                     prizeValue={a.prize_value}
+                    orbSrc={ORB_BY_SLUG[a.slug] ?? "/home/award-orb.png"}
+                    flip={i % 2 === 1}
                   />
                 ))}
               </div>

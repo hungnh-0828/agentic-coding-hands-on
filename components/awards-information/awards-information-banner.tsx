@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export function AwardsInformationBanner() {
@@ -5,21 +6,31 @@ export function AwardsInformationBanner() {
   return (
     <section
       aria-label={`${t("title")} — ${t("subtitle")}`}
-      className="relative isolate overflow-hidden border-b border-white/5"
+      className="relative isolate overflow-hidden border-b border-[#2e3940]"
     >
+      {/* Root-pattern key visual — anchored right, fading into the dark page on the left. */}
+      <Image
+        src="/home/hero-bg.png"
+        alt=""
+        aria-hidden
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover object-right"
+      />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_50%_30%,rgba(255,212,0,0.15),transparent_70%)]"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-saa-bg via-saa-bg/85 to-saa-bg/20"
       />
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-24 text-center">
-        <h1 className="font-black tracking-tight">
-          <span className="block bg-gradient-to-b from-white to-saa-text/60 bg-clip-text text-5xl text-transparent sm:text-7xl">
-            {t("title")}
-          </span>
-        </h1>
-        <p className="mt-4 text-sm uppercase tracking-[0.4em] text-saa-accent">
-          {t("subtitle")}
-        </p>
+      <div className="mx-auto w-full max-w-7xl px-6 py-20 sm:py-28">
+        <Image
+          src="/login/root-further.png"
+          alt={t("title")}
+          width={451}
+          height={200}
+          priority
+          className="h-auto w-[260px] sm:w-[360px] md:w-[420px]"
+        />
       </div>
     </section>
   );
