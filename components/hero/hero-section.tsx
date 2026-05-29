@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/lib/i18n/navigation";
@@ -14,41 +15,60 @@ export function HeroSection() {
 
   return (
     <section className="relative isolate overflow-hidden">
+      {/* Root-pattern key visual — anchored to the right, fades into the dark page on the left. */}
+      <Image
+        src="/home/hero-bg.png"
+        alt=""
+        aria-hidden
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover object-right"
+      />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(255,212,0,0.10),transparent_60%)]"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-saa-bg via-saa-bg/85 to-saa-bg/20"
       />
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 pt-20 sm:pt-32">
-        <h1 className="text-center font-black tracking-tight text-saa-text">
-          <span className="block bg-gradient-to-b from-white to-saa-text/60 bg-clip-text text-5xl text-transparent sm:text-7xl md:text-8xl">
-            {t("title")}
-          </span>
-        </h1>
-        {isFuture && (
-          <p className="mt-4 text-sm uppercase tracking-[0.4em] text-saa-muted">
-            {t("comingSoon")}
-          </p>
-        )}
 
-        <div className="mt-12 w-full">
-          <CountdownTimer eventISO={eventISO} />
-        </div>
+      <div className="mx-auto w-full max-w-7xl px-6 py-20 sm:py-28">
+        <div className="max-w-2xl">
+          <Image
+            src="/login/root-further.png"
+            alt={t("title")}
+            width={451}
+            height={200}
+            priority
+            className="h-auto w-[260px] sm:w-[360px] md:w-[420px]"
+          />
 
-        <EventInfo />
+          {isFuture && (
+            <p className="mt-6 text-sm uppercase tracking-[0.3em] text-saa-muted">
+              {t("comingSoon")}
+            </p>
+          )}
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/awards-information"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-saa-accent px-7 text-sm font-bold uppercase tracking-wider text-saa-bg hover:bg-saa-accent-soft"
-          >
-            {t("ctaAwards")}
-          </Link>
-          <Link
-            href="/sun-kudos"
-            className="inline-flex h-12 items-center justify-center rounded-full border border-saa-accent px-7 text-sm font-bold uppercase tracking-wider text-saa-accent hover:bg-saa-accent hover:text-saa-bg"
-          >
-            {t("ctaKudos")}
-          </Link>
+          <div className="mt-8">
+            <div className="flex justify-start">
+              <CountdownTimer eventISO={eventISO} variant="led" tone="light" />
+            </div>
+          </div>
+
+          <EventInfo />
+
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Link
+              href="/awards-information"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-saa-accent-soft px-7 text-sm font-bold uppercase tracking-wider text-saa-bg hover:bg-saa-accent"
+            >
+              {t("ctaAwards")}
+            </Link>
+            <Link
+              href="/sun-kudos"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-saa-accent-soft px-7 text-sm font-bold uppercase tracking-wider text-saa-accent-soft hover:bg-saa-accent-soft hover:text-saa-bg"
+            >
+              {t("ctaKudos")}
+            </Link>
+          </div>
         </div>
       </div>
     </section>
