@@ -39,7 +39,7 @@ export function LoginForm() {
 
   if (isAuthenticated) {
     return (
-      <p role="status" className="mt-10 text-sm text-white/70">
+      <p role="status" className="mt-6 ml-4 text-sm text-white/70">
         {t("alreadyAuthed")}
       </p>
     );
@@ -51,9 +51,9 @@ export function LoginForm() {
       onClick={handleGoogleSignIn}
       disabled={loading}
       aria-busy={loading}
-      className="mt-10 inline-flex h-14 min-w-[280px] items-center justify-between gap-3 rounded-sm bg-[#FFEA9E] px-7 text-base font-semibold text-[#00101A] shadow-md transition hover:bg-[#FFF8E1] disabled:cursor-not-allowed disabled:opacity-70"
+      className="mt-6 ml-4 inline-flex h-[60px] items-center gap-2 rounded-lg bg-[#FFEA9E] px-6 text-[22px] font-bold leading-7 text-[#00101A] shadow-md transition hover:bg-[#FFF8E1] disabled:cursor-not-allowed disabled:opacity-70"
     >
-      <span className="flex-1 text-left tracking-wide">
+      <span className="whitespace-nowrap">
         {loading ? t("loading") : t("googleCta")}
       </span>
       {loading ? <Spinner /> : <Image src="/login/google-g.svg" alt="" width={24} height={24} aria-hidden />}
