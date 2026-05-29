@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 
 import { CountdownTimer } from "@/components/hero/countdown-timer";
@@ -26,12 +27,20 @@ export default async function PrelaunchPage({
   const eventISO = getEventISO();
 
   return (
-    <main className="relative flex min-h-screen flex-1 flex-col items-center justify-center overflow-hidden px-6 py-16">
-      <div
+    <main className="relative isolate flex min-h-screen flex-1 flex-col items-center justify-center overflow-hidden px-6 py-16">
+      {/* Root-pattern key visual fills the viewport (cover, no repeat). */}
+      <Image
+        src="/home/hero-bg.png"
+        alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_80%_at_50%_30%,rgba(255,212,0,0.10),transparent_60%)]"
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover"
       />
-      <h1 className="mb-12 text-center text-2xl font-semibold text-saa-text sm:text-3xl">
+      {/* Semi-transparent dark cover keeps the text and digits readable. */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-saa-bg/60" />
+      <h1 className="mb-6 text-center font-montserrat text-3xl font-bold text-white sm:text-4xl">
         {t("title")}
       </h1>
       <CountdownTimer eventISO={eventISO} variant="led" />
