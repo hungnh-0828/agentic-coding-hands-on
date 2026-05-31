@@ -22,12 +22,12 @@ export function LikeButton({ kudos }: { kudos: KudosPost }) {
       disabled={disabled}
       aria-pressed={isLiked}
       aria-label={t("likeAria", { count: totalWeight })}
-      className="inline-flex items-center gap-1.5 text-sm transition disabled:cursor-not-allowed disabled:opacity-50"
+      className="inline-flex items-center gap-2 text-base transition disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <span className="tabular-nums text-saa-text/80">{totalWeight}</span>
+      <span className="font-bold tabular-nums text-saa-ink">{totalWeight.toLocaleString("vi-VN")}</span>
       <svg
         viewBox="0 0 24 24"
-        className={`h-5 w-5 ${isLiked ? "fill-red-500 text-red-500" : "fill-none text-saa-muted"}`}
+        className={`h-6 w-6 ${isLiked ? "fill-red-500 text-red-500" : "fill-none text-saa-ink-soft"}`}
         stroke="currentColor"
         strokeWidth="2"
       >

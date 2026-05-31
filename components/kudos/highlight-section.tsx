@@ -7,6 +7,45 @@ import { useKudosBoard } from "./kudos-board-context";
 import { KudosCard } from "./kudos-card";
 import { KudosFilters } from "./kudos-filters";
 
+function CircleArrow({
+  dir,
+  onClick,
+  disabled,
+  label,
+  size = "md",
+  decorative = false,
+}: {
+  dir: "prev" | "next";
+  onClick: () => void;
+  disabled: boolean;
+  label: string;
+  size?: "sm" | "md";
+  // `decorative` arrows duplicate the real pager controls for pointer users only;
+  // keep them out of the tab order / a11y tree to avoid duplicate announcements.
+  decorative?: boolean;
+}) {
+  const dim = size === "md" ? "h-11 w-11" : "h-8 w-8";
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={decorative ? undefined : label}
+      aria-hidden={decorative || undefined}
+      tabIndex={decorative ? -1 : undefined}
+      className={`inline-flex ${dim} items-center justify-center rounded-full border border-white/15 bg-saa-bg-elev/80 text-saa-text transition hover:border-saa-accent hover:text-saa-accent disabled:cursor-not-allowed disabled:opacity-30`}
+    >
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d={dir === "prev" ? "M15 18l-6-6 6-6" : "M9 18l6-6-6-6"}
+        />
+      </svg>
+    </button>
+  );
+}
+
 export function HighlightSection() {
   const t = useTranslations("kudos.highlight");
   const tCard = useTranslations("kudos.card");
@@ -33,28 +72,24 @@ export function HighlightSection() {
 
       <div className="mt-10">
         {current ? (
-          <div className="flex flex-col items-stretch gap-4">
-            <KudosCard kudos={current} variant="highlight" />
-            <div className="flex items-center justify-center gap-4 text-sm text-saa-muted">
-              <button
-                type="button"
-                onClick={goPrev}
-                disabled={safeIndex === 0}
-                aria-label={tCard("carouselPrev")}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 hover:border-saa-accent/40 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                ←
-              </button>
-              <span className="tabular-nums">{safeIndex + 1}/{total}</span>
-              <button
-                type="button"
-                onClick={goNext}
-                disabled={safeIndex === total - 1}
-                aria-label={tCard("carouselNext")}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 hover:border-saa-accent/40 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                →
-              </button>
+          <div className="flex flex-col items-center gap-6">
+            <div className="relative w-full max-w-2xl">
+              {/* Flanking navigation, pulled just outside the card on wide screens. */}
+              <div className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 lg:-left-16">
+                <CircleArrow dir="prev" decorative onClick={goPrev} disabled={safeIndex === 0} label={tCard("carouselPrev")} />
+              </div>
+              <KudosCard kudos={current} variant="highlight" />
+              <div className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 lg:-right-16">
+                <CircleArrow dir="next" decorative onClick={goNext} disabled={safeIndex === total - 1} label={tCard("carouselNext")} />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 text-sm text-saa-text">
+              <CircleArrow dir="prev" size="sm" onClick={goPrev} disabled={safeIndex === 0} label={tCard("carouselPrev")} />
+              <span className="font-semibold tabular-nums">
+                {safeIndex + 1}/{total}
+              </span>
+              <CircleArrow dir="next" size="sm" onClick={goNext} disabled={safeIndex === total - 1} label={tCard("carouselNext")} />
             </div>
           </div>
         ) : (

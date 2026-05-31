@@ -96,10 +96,17 @@
   "kudos": {
     "banner": {
       "eyebrow": "SAA 2025 KUDOS",
-      "title": "Hệ thống ghi nhận lời cảm ơn"
+      "title": "Hệ thống ghi nhận và cảm ơn"
     },
     "sendInput": {
-      "placeholder": "Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?"
+      "placeholder": "Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?",
+      "searchPlaceholder": "Tìm kiếm profile Sunner"
+    },
+    "badge": {
+      "new": "New Hero",
+      "rising": "Rising Hero",
+      "super": "Super Hero",
+      "legend": "Legend Hero"
     },
     "filters": {
       "hashtag": "Hashtag",
@@ -125,6 +132,9 @@
     "card": {
       "copyLink": "Copy Link",
       "viewDetail": "Xem chi tiết",
+      "viewDetailTodo": "Trang chi tiết đang phát triển",
+      "edit": "Chỉnh sửa",
+      "editTodo": "Tính năng chỉnh sửa đang phát triển",
       "copiedToast": "Link copied — ready to share!",
       "sentTo": "đã gửi đến",
       "likeAria": "Thả tim — hiện {count}",
@@ -138,7 +148,7 @@
       "hearts": "Số tim bạn nhận được",
       "boxOpened": "Số Secret Box bạn đã mở",
       "boxUnopened": "Số Secret Box chưa mở",
-      "openBox": "Mở quà",
+      "openBox": "Mở Secret Box",
       "recentRanks": "10 SUNNER CÓ SỰ THĂNG HẠNG MỚI NHẤT",
       "recentPrizes": "10 SUNNER NHẬN QUÀ MỚI NHẤT",
       "empty": "Chưa có dữ liệu"

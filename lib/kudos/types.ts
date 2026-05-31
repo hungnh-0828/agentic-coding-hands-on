@@ -1,8 +1,15 @@
+import type { HeroBadge } from "./hero-badge";
+
 export type KudosPerson = {
   id: string;
   name: string;
   departmentSlug: string | null;
   departmentName: string | null;
+  avatarUrl: string | null;
+  // Lifetime kudos received → drives the hero badge + star count shown on cards.
+  receivedCount: number;
+  starCount: number;
+  badge: HeroBadge;
 };
 
 export type KudosHashtag = {
@@ -22,6 +29,7 @@ export type KudosPost = {
   title: string;
   content: string;
   createdAt: string;
+  imageUrls: string[];
   hashtags: KudosHashtag[];
   likes: KudosLike[];
   // When true, the sender identity is hidden on the board in favour of anonymousName.

@@ -2,6 +2,9 @@
 
 import { useTranslations } from "next-intl";
 
+import { useKudosBoard } from "./kudos-board-context";
+import { PersonBlock } from "./person-block";
+import { KudosImageGallery } from "./kudos-image-gallery";
 import { LikeButton } from "./like-button";
 import { CopyLinkButton } from "./copy-link-button";
 
@@ -13,67 +16,92 @@ function formatTimestamp(iso: string): string {
   return `${pad(d.getHours())}:${pad(d.getMinutes())} - ${pad(d.getMonth() + 1)}/${pad(d.getDate())}/${d.getFullYear()}`;
 }
 
-function PersonBlock({ name, dept }: { name: string; dept: string | null }) {
-  const initial = name.charAt(0).toUpperCase();
+function SentIcon() {
   return (
-    <div className="flex items-center gap-2">
-      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-saa-accent/20 text-sm font-semibold text-saa-accent">
-        {initial}
-      </span>
-      <div className="leading-tight">
-        <p className="text-sm font-semibold text-saa-text">{name}</p>
-        {dept && <p className="text-xs text-saa-muted">{dept}</p>}
-      </div>
-    </div>
+    <svg viewBox="0 0 24 24" className="mt-4 h-6 w-6 shrink-0 text-saa-ink-soft" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+    </svg>
   );
 }
 
 export function KudosCard({ kudos, variant = "feed" }: { kudos: KudosPost; variant?: "feed" | "highlight" }) {
   const t = useTranslations("kudos.card");
+  const { showToast } = useKudosBoard();
 
-  // Anonymous kudos hide the real sender identity behind the chosen display name.
-  const senderName = kudos.isAnonymous ? kudos.anonymousName || t("anonymous") : kudos.sender.name;
-  const senderDept = kudos.isAnonymous ? null : kudos.sender.departmentName;
+  // Anonymous kudos hide the sender identity (no avatar, no dept, no badge).
+  const isAnon = kudos.isAnonymous;
+  const senderName = isAnon ? kudos.anonymousName || t("anonymous") : kudos.sender.name;
 
   return (
     <article
       id={`kudos-${kudos.id}`}
-      className={`flex flex-col gap-4 rounded-2xl border border-white/10 bg-saa-bg-elev p-5 ${
-        variant === "highlight" ? "saa-card-glow" : ""
-      }`}
+      className="flex flex-col gap-4 rounded-[24px] bg-saa-card px-6 pt-8 pb-4 text-saa-ink shadow-[0_18px_50px_-20px_rgba(0,0,0,0.55)] sm:px-10 sm:pt-10"
     >
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-3">
-          <PersonBlock name={senderName} dept={senderDept} />
-          <svg viewBox="0 0 24 24" className="h-4 w-4 text-saa-muted" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-          <PersonBlock name={kudos.receiver.name} dept={kudos.receiver.departmentName} />
-        </div>
-        <time className="text-xs text-saa-muted">{formatTimestamp(kudos.createdAt)}</time>
+      <header className="flex items-start gap-3">
+        <PersonBlock
+          name={senderName}
+          dept={isAnon ? null : kudos.sender.departmentName}
+          avatarUrl={isAnon ? null : kudos.sender.avatarUrl}
+          badge={isAnon ? null : kudos.sender.badge}
+          align="left"
+        />
+        <SentIcon />
+        <PersonBlock
+          name={kudos.receiver.name}
+          dept={kudos.receiver.departmentName}
+          avatarUrl={kudos.receiver.avatarUrl}
+          badge={kudos.receiver.badge}
+          align="right"
+        />
       </header>
-      {kudos.title && <h3 className="text-base font-bold text-saa-accent">{kudos.title}</h3>}
-      <p className={`text-sm leading-relaxed text-saa-text/90 ${variant === "feed" ? "line-clamp-5" : "line-clamp-3"}`}>
-        {kudos.content}
-      </p>
-      {kudos.hashtags.length > 0 && (
-        <ul className="flex flex-wrap gap-2">
-          {kudos.hashtags.slice(0, 5).map((h) => (
-            <li
-              key={h.slug}
-              className="rounded-full border border-saa-border bg-saa-accent/10 px-3 py-1 text-xs text-saa-accent"
+
+      <hr className="border-saa-ink/10" />
+
+      <time className="text-xs font-medium text-saa-ink-soft">{formatTimestamp(kudos.createdAt)}</time>
+
+      {kudos.title && (
+        <div className="relative flex items-center justify-center">
+          <h3 className="text-center text-sm font-bold uppercase tracking-wide text-saa-ink">{kudos.title}</h3>
+          {variant === "feed" && (
+            <button
+              type="button"
+              onClick={() => showToast(t("editTodo"))}
+              aria-label={t("edit")}
+              className="absolute right-0 text-saa-ink-soft hover:text-saa-ink"
             >
-              #{h.label}
-            </li>
-          ))}
-        </ul>
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11 4H4v16h16v-7M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+            </button>
+          )}
+        </div>
       )}
-      <footer className="flex items-center justify-between gap-4 border-t border-white/5 pt-4">
+
+      <div className="rounded-2xl bg-saa-card-inner px-5 py-4">
+        <p className={`font-semibold leading-relaxed text-saa-ink ${variant === "feed" ? "line-clamp-5" : "line-clamp-3"}`}>
+          {kudos.content}
+        </p>
+      </div>
+
+      <KudosImageGallery urls={kudos.imageUrls} />
+
+      {kudos.hashtags.length > 0 && (
+        <p className="line-clamp-1 text-sm font-semibold text-saa-hashtag">
+          {kudos.hashtags.slice(0, 5).map((h) => `#${h.label}`).join(" ")}
+          {kudos.hashtags.length > 5 ? "…" : ""}
+        </p>
+      )}
+
+      <footer className="flex items-center justify-between gap-4 border-t border-saa-ink/10 pt-4">
         <LikeButton kudos={kudos} />
         <div className="flex items-center gap-4">
           <CopyLinkButton kudosId={kudos.id} />
           {variant === "highlight" && (
-            <button type="button" className="text-sm text-saa-accent hover:underline">
+            <button
+              type="button"
+              onClick={() => showToast(t("viewDetailTodo"))}
+              className="text-sm font-semibold text-saa-ink hover:underline"
+            >
               {t("viewDetail")}
             </button>
           )}
