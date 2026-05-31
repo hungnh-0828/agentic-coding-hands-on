@@ -6,6 +6,10 @@ All notable changes to SAA 2025 are recorded here. Format loosely follows
 ## 2026-06-01
 
 ### Added
+- **Playwright E2E suite** — 14 tests across 3 spec files (`navigation.spec.ts`,
+  `auth.spec.ts`, `kudos.spec.ts`). Config boots `next dev` via `webServer`,
+  warms all routes in `globalSetup`, retries once on flake. Chromium only.
+  Run with `npm run test:e2e` (requires `npx playwright install chromium` once).
 - **Unit test suite expansion** — 134 new tests across 5 files (event handlers,
   i18n routing, i18n request, kudos queries, kudos actions); all passing.
 - **Vitest `@/` alias** — added `resolve.alias` in `vitest.config.ts` to mirror
