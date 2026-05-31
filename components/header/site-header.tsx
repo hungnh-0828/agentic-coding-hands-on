@@ -45,7 +45,7 @@ export async function SiteHeader() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            <NavLink href="/about-saa-2025">{t("about")}</NavLink>
+            <NavLink href="/">{t("about")}</NavLink>
             <NavLink href="/awards-information">{t("awards")}</NavLink>
             <NavLink href="/sun-kudos">{t("kudos")}</NavLink>
           </nav>
