@@ -3,6 +3,14 @@
 All notable changes to SAA 2025 are recorded here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/); dates are `YYYY-MM-DD`.
 
+## 2026-06-01
+
+### Added
+- **Unit test suite expansion** — 134 new tests across 5 files (event handlers,
+  i18n routing, i18n request, kudos queries, kudos actions); all passing.
+- **Vitest `@/` alias** — added `resolve.alias` in `vitest.config.ts` to mirror
+  `tsconfig` path mapping so tests resolve `@/` imports correctly.
+
 ## 2026-05-29
 
 ### Fixed
