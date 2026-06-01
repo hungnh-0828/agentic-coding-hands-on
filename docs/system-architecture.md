@@ -26,6 +26,76 @@ NAT Gateway(s) provide private-subnet egress; ECR holds the app image.
 Aurora master password is generated and stored in Secrets Manager.
 ```
 
+### Diagram (Mermaid)
+
+```mermaid
+flowchart TB
+    user([Internet / Users])
+
+    subgraph aws["AWS · ap-southeast-1"]
+        ecr[("ECR<br/>app image (immutable)")]
+        secrets[["Secrets Manager<br/>Aurora master creds"]]
+
+        subgraph vpc["VPC 10.x.0.0/16"]
+            igw{{Internet Gateway}}
+
+            subgraph public["Public subnets (per AZ)"]
+                alb["ALB<br/>HTTP→HTTPS / TLS 1.3<br/>SG: 80,443"]
+                nat{{NAT Gateway<br/>1 shared · prod 1/AZ}}
+            end
+
+            subgraph private["Private subnets (per AZ)"]
+                ecs["ECS Fargate service<br/>SG: from ALB only<br/>no public IP"]
+                lambda["Worker Lambda<br/>VPC-attached"]
+                aurora[("Aurora PostgreSQL 17.7<br/>writer + reader(prod)<br/>SG: 5432 from ECS/Lambda<br/>encrypted")]
+            end
+        end
+
+        s3[("S3 bucket<br/>versioned · SSE · TLS-only<br/>public access blocked")]
+    end
+
+    user -->|80/443| alb
+    igw <--> alb
+    alb -->|container_port| ecs
+    ecs -->|5432| aurora
+    lambda -->|5432| aurora
+    ecs -.egress.-> nat
+    lambda -.egress.-> nat
+    nat <--> igw
+    ecr -.image pull.-> ecs
+    secrets -.injected.-> ecs
+    secrets -.read.-> lambda
+    ecs -.->|assets| s3
+    lambda -.->|assets| s3
+    aurora -.master pw.-> secrets
+
+    classDef db fill:#1d4ed8,stroke:#1e3a8a,color:#fff
+    classDef store fill:#047857,stroke:#065f46,color:#fff
+    classDef edge fill:#b45309,stroke:#92400e,color:#fff
+    class aurora db
+    class s3,ecr,secrets store
+    class alb,nat,igw edge
+```
+
+Module dependency graph (Terraform `module` wiring per env):
+
+```mermaid
+flowchart LR
+    vpc[vpc] --> sg[security-groups]
+    vpc --> aurora[aurora]
+    vpc --> alb[alb]
+    vpc --> ecs[ecs]
+    vpc --> lambda[lambda]
+    sg --> aurora
+    sg --> alb
+    sg --> ecs
+    sg --> lambda
+    alb -->|target_group_arn| ecs
+    aurora -->|secret_arn| ecs
+    aurora -->|secret_arn| lambda
+    s3[s3]
+```
+
 ### Modules
 
 | Module | Responsibility |
