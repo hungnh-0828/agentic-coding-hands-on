@@ -1,0 +1,48 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,TC_KUDOS_ACC_001,Sun* Kudos - Live board,Check authentication,Kudos board,Authenticated access,Verify board loads for authenticated user and sidebar shows that user's personal stats,User logged in,,1. Open Sun* Kudos board,Board loads; sidebar shows current user's Kudos/heart/Secret Box stats,Yes,High,Access control and security,,,,
+GUI,TC_KUDOS_GUI_001,Sun* Kudos - Live board,Check layout,Screen-wide layout,Overall structure,"Verify overall layout: banner, record input, HIGHLIGHT KUDOS (filters + carousel), Spotlight board, ALL KUDOS feed, right sidebar (stats + leaderboards)",Board open,,"1. Open board
+2. Compare against design",Layout matches design spec,Yes,High,User interface,,,,
+GUI,TC_KUDOS_GUI_002,Sun* Kudos - Live board,Initialize,Record kudos input,Placeholder text,Verify record input shows placeholder and pencil icon,Board open,,1. Observe record input,"Placeholder ""Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?"" with pencil icon",Yes,Medium,User interface,,,,
+GUI,TC_KUDOS_GUI_003,Sun* Kudos - Live board,Initialize,Spotlight search,Placeholder text,Verify Spotlight search shows placeholder and magnifier icon,Board open,,1. Observe Spotlight search,"Placeholder ""Tìm kiếm"" with magnifier icon",Yes,Low,User interface,,,,
+GUI,TC_KUDOS_GUI_004,Sun* Kudos - Live board,Check layout,Data-present state,With data,"Verify a kudos card shows sender/receiver info, post time, content, hashtags, optional gallery, heart count, Copy Link, Xem chi tiết; and sidebar shows 5 stat rows + 2 leaderboards",Board with data,,"1. Inspect a kudos card
+2. Inspect sidebar",Card and sidebar render all expected fields,Yes,High,User interface,,,,
+GUI,TC_KUDOS_GUI_005,Sun* Kudos - Live board,Check layout,Empty state,No data,Verify empty messages when no data,No kudos; empty leaderboards,,"1. View kudos lists empty
+2. View sidebar lists empty","Kudos lists show ""Hiện tại chưa có Kudos nào.""; sidebar lists show ""Chưa có dữ liệu""",Yes,Medium,User interface,,,,
+GUI,TC_KUDOS_GUI_006,Sun* Kudos - Live board,Initialize,Kudos content,Truncation,Verify content/hashtag truncation rules,Long content/hashtags,,"1. View Highlight card long content
+2. View All card long content
+3. View >5 hashtags","Highlight content max 3 lines, All max 5 lines, hashtags max 5/line; overflow shows ""...""",Yes,Medium,User interface,,,,
+GUI,TC_KUDOS_GUI_007,Sun* Kudos - Live board,Initialize,Heart button,Active/inactive styling,"Verify heart icon gray when not liked, red when liked",Board with data,,"1. View an unliked heart
+2. View a liked heart","Gray when inactive, red when active",Yes,Low,User interface,,,,
+GUI,TC_KUDOS_GUI_008,Sun* Kudos - Live board,Initialize,Highlight carousel,Default value/state,"Verify active slide centered/highlighted, side slides dimmed, pagination shows index like ""2/5""",Board with ≥1 highlight,,1. Observe carousel,"Center slide highlighted, sides dimmed, pagination index shown",Yes,Medium,User interface,,,,
+FUNCTION,TC_KUDOS_FUN_001,Sun* Kudos - Live board,Check component interaction,Record kudos input,Open,Verify clicking the record input opens the send-kudos dialog,Board open,,1. Click record input,Send-kudos dialog opens,Yes,High,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_002,Sun* Kudos - Live board,Check component interaction,Hashtag filter,Filter apply,Verify selecting a hashtag filters both Highlight and All Kudos and resets pagination to 1,Board with data,A hashtag value,"1. Open Hashtag filter
+2. Select a tag",Both lists filtered to that tag; carousel pagination reset to 1,Yes,High,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_003,Sun* Kudos - Live board,Check component interaction,Department filter,Filter apply,Verify selecting a department filters both Highlight and All Kudos and resets pagination,Board with data,A department value,"1. Open Phòng ban filter
+2. Select a department",Both lists filtered; pagination reset to 1,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_004,Sun* Kudos - Live board,Check component interaction,Hashtag tag,Filter apply,Verify clicking a hashtag inside a card sets the Hashtag filter to that tag,Board with data,,1. Click a hashtag in a kudos card,Hashtag filter set to that tag; both views updated,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_005,Sun* Kudos - Live board,Check list behavior,Highlight carousel,Navigate,Verify arrows move between slides and pagination index updates,≥2 highlight slides,,"1. Click right arrow
+2. Click left arrow",Slides change accordingly; pagination index updates,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_006,Sun* Kudos - Live board,Check branching condition,Carousel arrows,Disabled at ends,Verify left arrow disabled on slide 1 and right arrow disabled on slide 5,5 highlight slides,,"1. Go to slide 1
+2. Go to slide 5",Left arrow disabled at slide 1; right arrow disabled at slide 5,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_007,Sun* Kudos - Live board,Check component interaction,Kudos card,Open detail,"Verify clicking a card or ""Xem chi tiết"" opens the kudos detail",Board with data,,"1. Click a card / ""Xem chi tiết""",Kudos detail opens,Yes,High,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_008,Sun* Kudos - Live board,Check component interaction,Heart button,Toggle,"Verify clicking heart toggles like, updates count and active state","Board with data, not own kudos",,"1. Click heart to like
+2. Click again to unlike",Count +1/red then -1/gray; state toggles,Yes,High,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_009,Sun* Kudos - Live board,Check business logic,Heart like,Like rules,Verify one like per user adds 1 heart to receiver (2 on admin special days) and unliking revokes it,Board with data,,"1. Like a kudos on a normal day
+2. Like a kudos on a configured special day
+3. Unlike each","Receiver +1 normally, +2 on special day; unlike revokes the same amount; only one like per user per kudos",Yes,High,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_010,Sun* Kudos - Live board,Check business logic,Heart like,Self-kudos disabled,Verify the sender cannot like their own kudos,Logged in as a kudos sender,,1. View own sent kudos,Heart button disabled on own kudos,Yes,High,Abnormal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_011,Sun* Kudos - Live board,Check component interaction,Copy Link,Copy,"Verify ""Copy Link"" copies the URL and shows the toast",Board with data,,"1. Click ""Copy Link""","URL copied; toast ""Link copied — ready to share!"" shown",Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_012,Sun* Kudos - Live board,Check list behavior,All Kudos feed,Infinite scroll,Verify scrolling the feed loads more kudos,Many kudos exist,,1. Scroll to bottom of feed,More kudos load automatically,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_013,Sun* Kudos - Live board,Check navigation behavior,User avatar/name,Open profile,Verify clicking a sender/receiver avatar or name opens profile; hover shows preview,Board with data,,"1. Click an avatar/name
+2. Hover an avatar/name",Profile opens on click; preview shows on hover,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_014,Sun* Kudos - Live board,Check component interaction,Star count,Hover tooltip,Verify hovering the star count shows the tier description,Board with data,,1. Hover the star count,"Tooltip shows star-tier text (1★=10, 2★=20, 3★=50 Kudos)",Yes,Low,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_015,Sun* Kudos - Live board,Check component interaction,Gallery image,Open,Verify clicking a gallery thumbnail opens the full image,Kudos with gallery,,1. Click a gallery thumbnail,Full-size image opens (max 5 thumbnails shown),Yes,Low,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_016,Sun* Kudos - Live board,Check component interaction,Mở quà button,Open,"Verify ""Mở quà"" opens the Secret Box dialog",Eligible to open gift,,"1. Click ""Mở quà""",Secret Box dialog opens,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_017,Sun* Kudos - Live board,Check branching condition,Mở quà button,Eligibility disabled,"Verify ""Mở quà"" is disabled when not eligible",Not eligible,,"1. Observe ""Mở quà"" button",Button disabled,Yes,Low,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_018,Sun* Kudos - Live board,Check component interaction,Spotlight node,Open detail,Verify hovering a node shows tooltip and clicking opens the kudos detail,Spotlight has data,,"1. Hover a node
+2. Click the node",Tooltip (name + time) on hover; detail opens on click,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_019,Sun* Kudos - Live board,Check component interaction,Spotlight,Pan/Zoom toggle,Verify the Pan/Zoom button toggles pan/zoom mode,Spotlight has data,,"1. Click ""Pan/Zoom""",Pan/zoom mode toggles,Yes,Low,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_020,Sun* Kudos - Live board,Check component interaction,Spotlight search,Search,Verify searching a Sunner keyword returns matching results,Spotlight has data,Valid Sunner name,"1. Type a name
+2. Press Enter / click magnifier",Matching Sunner(s) shown,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_KUDOS_FUN_021,Sun* Kudos - Live board,Check data validation,Spotlight search,Max length,Verify the search input enforces the 100-character maximum,Spotlight search focused,100-char string; 101-char string,"1. Enter exactly 100 chars
+2. Attempt to enter 101 chars",100 chars accepted; input capped at 100,Yes,Low,Normal_Others,,,,
