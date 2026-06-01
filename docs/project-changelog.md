@@ -5,6 +5,26 @@ All notable changes to SAA 2025 are recorded here. Format loosely follows
 
 ## 2026-06-01
 
+### Infrastructure
+- **AWS Terraform IaC stack** — full production infrastructure under `infra/`:
+  reusable modules (vpc, security-groups, aurora, alb, ecs, s3, lambda) composed
+  per environment under `infra/envs/{dev,staging,prod}/`. Region ap-southeast-1.
+  Aurora PostgreSQL 17.7, ECS Fargate, ALB with TLS, S3 (versioned + SSE),
+  VPC-attached worker Lambda. State stored in S3 + DynamoDB locking per env.
+
+### Documentation
+- **README.md rewrite** — replaced create-next-app boilerplate with real project
+  description, feature list, tech stack table, prerequisites, getting started
+  steps, scripts table, project structure overview, and docs pointers.
+- **docs/system-architecture.md — Application Architecture section** — prepended
+  app-level architecture: route map, server/client boundary pattern, data layer
+  (Supabase clients, 8 tables, key queries/actions, DRY validation), i18n setup,
+  auth model, and request-flow Mermaid diagram. AWS infra section unchanged.
+- **docs/codebase-summary.md** (new) — navigational map: top-level directory
+  table, lib/ module breakdown, component-group inventory, DB schema summary
+  (8 tables + migration history), testing layout (Vitest + Playwright), and key
+  conventions reference.
+
 ### Added
 - **Playwright E2E suite** — 14 tests across 3 spec files (`navigation.spec.ts`,
   `auth.spec.ts`, `kudos.spec.ts`). Config boots `next dev` via `webServer`,
