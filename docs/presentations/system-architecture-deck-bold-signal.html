@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>System Architecture — SAA 2025</title>
+
+<!-- Google Fonts: Archivo Black + Space Grotesk (Bold Signal preset) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+
+<style>
+:root {
+  /* Bold Signal palette */
+  --bg-primary: #1a1a1a;
+  --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  --bg-elev: #242424;
+  --orange: #FF5722;
+  --orange-dark: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a8a8a8;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-orange: rgba(255, 87, 34, 0.45);
+  --accent: var(--orange);
+
+  --font-display: "Archivo Black", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+
+  --title-size: clamp(2rem, 6vw, 5rem);
+  --h2-size: clamp(1.4rem, 3.6vw, 2.6rem);
+  --h3-size: clamp(1rem, 2.2vw, 1.6rem);
+  --subtitle-size: clamp(0.9rem, 2vw, 1.3rem);
+  --body-size: clamp(0.78rem, 1.35vw, 1.05rem);
+  --small-size: clamp(0.66rem, 1vw, 0.85rem);
+  --mono-size: clamp(0.7rem, 1.1vw, 0.95rem);
+  --bignum-size: clamp(3.5rem, 11vw, 9rem);
+
+  --slide-padding: clamp(1.5rem, 4.5vw, 4.5rem);
+  --content-gap: clamp(0.9rem, 2vw, 1.8rem);
+  --element-gap: clamp(0.4rem, 1vw, 1rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-normal: 0.7s;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ---- viewport-base.css ---- */
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-gradient);
+}
+
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+  overflow: hidden;
+  padding: var(--slide-padding);
+  position: relative;
+  z-index: 2;
+}
+
+img, .image-container { max-width: 100%; max-height: min(50vh, 400px); object-fit: contain; }
+
+@media (max-height: 700px) {
+  :root {
+    --slide-padding: clamp(1rem, 3vw, 2.5rem);
+    --content-gap: clamp(0.6rem, 1.5vw, 1.1rem);
+    --title-size: clamp(1.5rem, 5vw, 3rem);
+    --h2-size: clamp(1.2rem, 3vw, 1.9rem);
+    --bignum-size: clamp(2.5rem, 8vw, 6rem);
+  }
+}
+@media (max-height: 600px) {
+  :root { --body-size: clamp(0.7rem, 1.2vw, 0.92rem); }
+  .nav-dots, .keyboard-hint, .decorative, .bignum, .breadcrumbs { display: none; }
+}
+@media (max-width: 600px) {
+  :root { --title-size: clamp(1.4rem, 8vw, 2.8rem); }
+  .grid { grid-template-columns: 1fr; }
+  .env-table { font-size: 0.62rem; }
+  .breadcrumbs { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---- Background layers (Bold Signal: dark gradient + bold orange blocks) ---- */
+.block-bg::before {
+  content: ''; position: absolute; z-index: 0; pointer-events: none;
+  top: calc(-1 * clamp(2rem, 6vw, 5rem)); right: calc(-1 * clamp(2rem, 6vw, 5rem));
+  width: clamp(8rem, 22vw, 18rem); height: clamp(8rem, 22vw, 18rem);
+  background: var(--orange); opacity: 0.08;
+  transform: rotate(12deg);
+}
+.block-bg::after {
+  content: ''; position: absolute; z-index: 0; pointer-events: none;
+  bottom: calc(-1 * clamp(3rem, 8vw, 6rem)); left: calc(-1 * clamp(3rem, 8vw, 6rem));
+  width: clamp(10rem, 26vw, 22rem); height: clamp(4rem, 10vw, 8rem);
+  background: var(--orange); opacity: 0.05;
+}
+
+/* ---- Big section number (signature element) ---- */
+.bignum {
+  position: absolute; top: var(--slide-padding); left: var(--slide-padding);
+  font-family: var(--font-display); font-size: var(--bignum-size);
+  line-height: 0.8; letter-spacing: -0.03em; z-index: 1; pointer-events: none;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 87, 34, 0.35);
+}
+
+/* ---- Navigation breadcrumbs (signature element) ---- */
+.breadcrumbs {
+  position: fixed; top: clamp(1rem, 2.4vw, 1.8rem); right: clamp(1.4rem, 3.5vw, 3rem);
+  z-index: 100; display: flex; gap: clamp(0.6rem, 1.4vw, 1.1rem);
+  font-family: var(--font-body); font-weight: 600;
+  font-size: var(--small-size); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.breadcrumbs button {
+  background: none; border: none; cursor: pointer; padding: 0;
+  color: var(--text-primary); opacity: 0.4; transition: opacity 0.3s, color 0.3s;
+  font-family: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit;
+}
+.breadcrumbs button.active { opacity: 1; color: var(--orange); }
+
+/* ---- Reveal animations ---- */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity var(--duration-normal) var(--ease-out-expo),
+              transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.08s; }
+.reveal:nth-child(2) { transition-delay: 0.18s; }
+.reveal:nth-child(3) { transition-delay: 0.28s; }
+.reveal:nth-child(4) { transition-delay: 0.38s; }
+.reveal:nth-child(5) { transition-delay: 0.48s; }
+.reveal:nth-child(6) { transition-delay: 0.58s; }
+
+.reveal-blur { opacity: 0; filter: blur(12px); transition: opacity 0.9s, filter 0.9s var(--ease-out-expo); }
+.slide.visible .reveal-blur { opacity: 1; filter: blur(0); }
+
+/* ---- Typography & components ---- */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 900; line-height: 1.04; letter-spacing: -0.01em; }
+
+.eyebrow {
+  font-family: var(--font-body); font-weight: 700;
+  font-size: var(--small-size); letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: var(--element-gap);
+  display: inline-flex; align-items: center; gap: 0.6em;
+}
+.eyebrow::before { content: ''; width: clamp(1.5rem, 3vw, 2.6rem); height: 4px; background: var(--orange); }
+
+.slide-num {
+  position: absolute; top: var(--slide-padding); right: var(--slide-padding);
+  font-family: var(--font-body); font-size: var(--small-size); font-weight: 600;
+  color: var(--text-secondary); letter-spacing: 0.1em; z-index: 3;
+}
+
+.glow { color: var(--orange); }
+.glow-m { color: var(--orange); }
+
+.lead { font-size: var(--subtitle-size); color: var(--text-secondary); line-height: 1.5; max-width: 60ch; }
+
+/* Title slide — bottom-left placement on a bold orange block */
+.title-slide .slide-content { justify-content: flex-end; align-items: flex-start; }
+.title-card {
+  background: var(--orange); color: var(--orange-dark);
+  padding: clamp(1.4rem, 3.5vw, 3rem) clamp(1.6rem, 4vw, 3.4rem);
+  border-radius: 4px; max-width: min(92vw, 760px);
+}
+.title-card .eyebrow { color: var(--orange-dark); }
+.title-card .eyebrow::before { background: var(--orange-dark); }
+.title-main { font-size: var(--title-size); font-weight: 900; color: var(--orange-dark); }
+.title-main .glow { color: var(--orange-dark); }
+.title-card .lead { color: rgba(26, 26, 26, 0.78); }
+.title-badge {
+  margin-top: var(--content-gap); display: inline-flex; flex-wrap: wrap; gap: 0.6rem;
+}
+.chip {
+  font-family: var(--font-body); font-weight: 600; font-size: var(--small-size);
+  padding: 0.45em 1em; border: 2px solid rgba(26,26,26,0.25); border-radius: 999px;
+  color: var(--orange-dark); background: transparent;
+}
+.chip.cyan { color: var(--orange-dark); border-color: var(--orange-dark); font-weight: 700; }
+
+/* Bullet list */
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: clamp(0.55rem, 1.4vh, 1.1rem); margin-top: var(--content-gap); }
+.feature-list li { font-size: var(--body-size); line-height: 1.45; color: var(--text-primary); display: flex; gap: 0.85em; align-items: flex-start; }
+.feature-list li::before { content: '▸'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+.feature-list li b { color: var(--orange); font-weight: 700; }
+.feature-list li.m::before { content: '▸'; color: var(--orange); }
+.feature-list li code, .step-body code, .lead code, .feature-list li b code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--orange);
+  background: rgba(255,87,34,0.1); padding: 0.1em 0.4em; border-radius: 5px; font-size: 0.9em;
+}
+
+/* Mono / code flow */
+.flow {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: var(--mono-size);
+  background: var(--bg-elev); border: 1px solid var(--line); border-left: 4px solid var(--orange);
+  border-radius: 10px;
+  padding: clamp(1rem, 2.2vw, 1.8rem); margin-top: var(--content-gap);
+  display: flex; flex-direction: column; gap: clamp(0.5rem, 1.4vh, 1rem);
+}
+.flow-row { display: flex; align-items: center; gap: 0.7em; flex-wrap: wrap; }
+.node {
+  padding: 0.4em 0.9em; border-radius: 6px; border: 1px solid var(--line);
+  background: rgba(255,255,255,0.04); color: var(--text-primary); white-space: nowrap;
+}
+.node.db { border-color: var(--line-orange); background: rgba(255,87,34,0.12); color: #ffd0c0; }
+.node.edge { border-color: var(--line-orange); color: var(--orange); }
+.arrow { color: var(--orange); font-weight: 700; }
+.port { color: var(--text-secondary); font-size: 0.85em; }
+
+/* Card grid */
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(0.6rem, 1.4vw, 1.1rem); margin-top: var(--content-gap);
+}
+.card {
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 10px;
+  padding: clamp(0.85rem, 1.8vw, 1.4rem); transition: transform 0.3s var(--ease-out-expo), border-color 0.3s, background 0.3s;
+}
+.card:hover { transform: translateY(-4px); border-color: var(--orange); }
+/* Bold orange focal cards */
+.card.focal { background: var(--orange); border-color: var(--orange); }
+.card.focal h3 { color: var(--orange-dark); }
+.card.focal p { color: rgba(26,26,26,0.82); }
+.card.focal .mono-key { color: var(--orange-dark); }
+.card h3 { font-size: var(--h3-size); color: var(--orange); margin-bottom: 0.3em; }
+.card .mono-key { font-family: ui-monospace, monospace; }
+.card p { font-size: var(--small-size); color: var(--text-secondary); line-height: 1.4; }
+
+/* Table */
+.env-table {
+  width: 100%; border-collapse: collapse; margin-top: var(--content-gap);
+  font-size: var(--small-size); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+}
+.env-table th, .env-table td { padding: clamp(0.5rem, 1.3vh, 0.95rem) clamp(0.6rem, 1.5vw, 1.2rem); text-align: left; border-bottom: 1px solid var(--line); }
+.env-table thead th { background: rgba(255,255,255,0.05); color: var(--text-primary); font-family: var(--font-body); font-weight: 700; letter-spacing: 0.02em; }
+.env-table thead th.prod { background: var(--orange); color: var(--orange-dark); }
+.env-table tbody th { color: var(--text-secondary); font-weight: 600; font-family: var(--font-body); }
+.env-table tbody td { color: var(--text-primary); }
+.env-table tr:last-child td, .env-table tr:last-child th { border-bottom: none; }
+.env-table td.hi { color: var(--orange); font-weight: 600; background: rgba(255,87,34,0.06); }
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: clamp(0.6rem, 1.6vh, 1.2rem); margin-top: var(--content-gap); }
+.step { display: flex; gap: 1em; align-items: flex-start; }
+.step-n {
+  flex-shrink: 0; width: clamp(2rem, 4vw, 2.8rem); height: clamp(2rem, 4vw, 2.8rem);
+  display: grid; place-items: center; border-radius: 6px;
+  font-family: var(--font-display); font-weight: 900; font-size: var(--body-size);
+  color: var(--orange-dark); background: var(--orange);
+}
+.step-body { font-size: var(--body-size); color: var(--text-primary); line-height: 1.45; }
+.step-body code { font-family: ui-monospace, monospace; color: var(--orange); background: rgba(255,87,34,0.1); padding: 0.1em 0.4em; border-radius: 5px; font-size: 0.9em; }
+
+/* Closing */
+.closing .slide-content { align-items: center; text-align: center; }
+.closing h2 { font-size: var(--title-size); }
+
+.keyboard-hint {
+  position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.15em;
+  text-transform: uppercase; z-index: 50; opacity: 0.5;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" style="position:fixed;top:0;left:0;height:4px;background:var(--orange);width:0%;z-index:101;transition:width 0.25s;"></div>
+<nav class="breadcrumbs"></nav>
+<nav class="nav-dots" style="position:fixed;right:1.4rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:0.55rem;"></nav>
+
+<!-- 1. TITLE -->
+<section class="slide title-slide block-bg" data-label="Title">
+  <span class="bignum">01</span>
+  <div class="slide-content">
+    <div class="title-card reveal">
+      <span class="eyebrow">SAA 2025 · Infrastructure</span>
+      <h1 class="title-main">System<br><span class="glow">Architecture</span></h1>
+      <p class="lead" style="margin-top:var(--content-gap);">Cloud topology, Terraform modules, and security posture for the SAA 2025 platform.</p>
+      <div class="title-badge">
+        <span class="chip cyan">AWS · ap-southeast-1</span>
+        <span class="chip">Terraform · aws ~&gt; 5.0</span>
+        <span class="chip">ECS Fargate · Aurora PG 17.7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. IaC FOUNDATION -->
+<section class="slide block-bg" data-label="IaC">
+  <span class="bignum">02</span>
+  <span class="slide-num">02 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal">Infrastructure as Code</span>
+    <h2 class="reveal">The Terraform <span class="glow">foundation</span></h2>
+    <ul class="feature-list">
+      <li class="reveal"><span><b>Reusable modules</b> live in <code>infra/modules/</code>, composed per environment under <code>infra/envs/{dev,staging,prod}/</code>.</span></li>
+      <li class="reveal"><span><b>Region</b> ap-southeast-1, provider <code>hashicorp/aws ~&gt; 5.0</code>.</span></li>
+      <li class="reveal"><span><b>Remote state</b> in per-environment S3 backends with DynamoDB locking via <code>backend.tf</code>.</span></li>
+      <li class="reveal m"><span><b>Secrets</b> — Aurora master password is generated and stored in Secrets Manager, never hardcoded.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. REQUEST TOPOLOGY -->
+<section class="slide block-bg" data-label="Topology">
+  <span class="bignum">03</span>
+  <span class="slide-num">03 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal">Request Topology</span>
+    <h2 class="reveal">From the edge to the <span class="glow-m">database</span></h2>
+    <div class="flow reveal-blur">
+      <div class="flow-row"><span class="node edge">Internet</span><span class="port">80 / 443</span><span class="arrow">→</span><span class="node edge">ALB</span><span class="port">public subnets · TLS 1.3</span></div>
+      <div class="flow-row"><span class="arrow">↳</span><span class="port">container_port (HTTP→HTTPS redirect)</span><span class="arrow">→</span><span class="node">ECS Fargate</span><span class="port">private · no public IP</span></div>
+      <div class="flow-row"><span class="arrow">↳</span><span class="port">5432</span><span class="arrow">→</span><span class="node db">Aurora PostgreSQL 17.7</span></div>
+      <div class="flow-row"><span class="node">Worker Lambda</span><span class="port">VPC-attached</span><span class="arrow">──5432──→</span><span class="node db">Aurora</span></div>
+      <div class="flow-row"><span class="node edge">S3</span><span class="port">private · TLS-only · versioned · SSE</span><span style="color:var(--text-secondary)">·</span><span class="node edge">ECR</span><span class="port">app image</span><span style="color:var(--text-secondary)">·</span><span class="node">NAT GW</span><span class="port">private egress</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. THE 7 MODULES -->
+<section class="slide block-bg" data-label="Modules">
+  <span class="bignum">04</span>
+  <span class="slide-num">04 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal">Composition</span>
+    <h2 class="reveal">Seven <span class="glow">modules</span></h2>
+    <div class="grid">
+      <div class="card focal reveal"><h3 class="mono-key">vpc</h3><p>Subnets across N AZs, IGW, NAT (shared or 1/AZ), route tables, optional flow logs.</p></div>
+      <div class="card reveal"><h3 class="mono-key">security-groups</h3><p>Layered ALB→ECS→RDS chain via source-SG refs. No CIDR on the DB port.</p></div>
+      <div class="card reveal"><h3 class="mono-key">aurora</h3><p>PostgreSQL cluster + instances, subnet group, Secrets-managed creds, encryption, monitoring.</p></div>
+      <div class="card reveal"><h3 class="mono-key">alb</h3><p>App LB, IP target group for Fargate, HTTP/HTTPS listeners (TLS 1.3), optional access logs.</p></div>
+      <div class="card reveal"><h3 class="mono-key">ecs</h3><p>Fargate cluster, task def, service w/ circuit breaker, immutable ECR + scan, IAM roles, logs.</p></div>
+      <div class="card reveal"><h3 class="mono-key">s3 · lambda</h3><p>S3: versioned, SSE, public-access block, TLS-only. Lambda: VPC-attached, single-source guard.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. MODULE WIRING -->
+<section class="slide block-bg" data-label="Wiring">
+  <span class="bignum">05</span>
+  <span class="slide-num">05 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal">Dependency Graph</span>
+    <h2 class="reveal">How modules <span class="glow">wire together</span></h2>
+    <div class="flow reveal-blur">
+      <div class="flow-row"><span class="node edge">vpc</span><span class="arrow">→</span><span class="node">security-groups</span><span class="arrow">→</span><span class="node db">aurora · alb · ecs · lambda</span></div>
+      <div class="flow-row"><span class="node edge">alb</span><span class="port">target_group_arn</span><span class="arrow">→</span><span class="node">ecs</span></div>
+      <div class="flow-row"><span class="node db">aurora</span><span class="port">secret_arn</span><span class="arrow">→</span><span class="node">ecs &amp; lambda</span></div>
+      <div class="flow-row"><span class="node edge">s3</span><span class="port">standalone — consumed by ecs &amp; lambda for assets</span></div>
+    </div>
+    <p class="lead reveal" style="margin-top:var(--element-gap);font-size:var(--small-size);">vpc is the root; security-groups fan out the network chain; alb and aurora feed compute via ARN outputs.</p>
+  </div>
+</section>
+
+<!-- 6. ENVIRONMENT PROFILES -->
+<section class="slide block-bg" data-label="Envs">
+  <span class="bignum">06</span>
+  <span class="slide-num">06 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal">Environments</span>
+    <h2 class="reveal">Dev → Staging → <span class="glow-m">Prod</span></h2>
+    <table class="env-table reveal">
+      <thead><tr><th></th><th>Dev</th><th>Staging</th><th class="prod">Prod</th></tr></thead>
+      <tbody>
+        <tr><th>AZs / NAT</th><td>2 AZ / 1 NAT</td><td>2 AZ / 1 NAT</td><td class="hi">3 AZ / 3 NAT (HA)</td></tr>
+        <tr><th>Aurora</th><td>t4g.medium ×1</td><td>r6g.large ×1</td><td class="hi">r6g.xlarge ×2 (W+R)</td></tr>
+        <tr><th>Fargate</th><td>0.25vCPU / 0.5GB ×1</td><td>0.5vCPU / 1GB ×2</td><td class="hi">1vCPU / 2GB ×3</td></tr>
+        <tr><th>Deletion protection</th><td>off</td><td>off</td><td class="hi">on (Aurora + ALB)</td></tr>
+        <tr><th>Flow logs</th><td>off</td><td>on</td><td class="hi">on</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7. SECURITY POSTURE -->
+<section class="slide block-bg" data-label="Security">
+  <span class="bignum">07</span>
+  <span class="slide-num">07 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal">Security Posture</span>
+    <h2 class="reveal">Defense in <span class="glow">depth</span></h2>
+    <ul class="feature-list">
+      <li class="reveal"><span>ECS tasks have <b>no public IP</b> — only the ALB is internet-facing.</span></li>
+      <li class="reveal"><span>DB reachable <b>only</b> from ECS/Lambda SGs — never <code>0.0.0.0/0</code> on 5432.</span></li>
+      <li class="reveal"><span>Aurora storage <b>encrypted</b>; password is random + Secrets Manager.</span></li>
+      <li class="reveal"><span>S3: all four public-access blocks, <code>BucketOwnerEnforced</code>, TLS-only policy.</span></li>
+      <li class="reveal m"><span>Prod ALB <b>fails plan</b> without an ACM certificate — no cleartext prod traffic.</span></li>
+      <li class="reveal"><span>CloudWatch log groups support optional CMK encryption (<code>log_kms_key_id</code>).</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8. DEPLOY + CLOSING -->
+<section class="slide closing block-bg" data-label="Deploy">
+  <span class="bignum">08</span>
+  <span class="slide-num">08 / 08</span>
+  <div class="slide-content">
+    <span class="eyebrow reveal" style="align-self:center;">Deploy Prerequisites</span>
+    <h2 class="reveal" style="margin-bottom:var(--content-gap);">Three steps to <span class="glow">ship</span></h2>
+    <div class="steps reveal" style="text-align:left;max-width:min(90vw,720px);align-self:center;">
+      <div class="step"><span class="step-n">1</span><span class="step-body">Bootstrap state backends — <code>webapp-tf-state-{env}</code> S3 + <code>webapp-tf-locks-{env}</code> DynamoDB.</span></div>
+      <div class="step"><span class="step-n">2</span><span class="step-body">Set a Lambda deployment source (<code>lambda_package_path</code> or S3) per env.</span></div>
+      <div class="step"><span class="step-n">3</span><span class="step-body">Set <code>alb_certificate_arn</code> for prod.</span></div>
+    </div>
+    <p class="lead reveal" style="margin-top:var(--content-gap);font-size:var(--small-size);">Cost estimates per environment → see infra-cost-breakdown.md</p>
+  </div>
+</section>
+
+<div class="keyboard-hint">↑ ↓ / swipe to navigate</div>
+
+<script>
+/* ---- Slide controller ---- */
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.navDotsContainer = document.querySelector('.nav-dots');
+    this.breadcrumbsContainer = document.querySelector('.breadcrumbs');
+    this.progressBar = document.querySelector('.progress-bar');
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupNavDots();
+    this.setupBreadcrumbs();
+  }
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = Array.from(this.slides).indexOf(entry.target);
+          this.updateNavDots();
+          this.updateBreadcrumbs();
+          this.updateProgressBar();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach((s) => observer.observe(s));
+  }
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (['ArrowDown', 'ArrowRight', ' ', 'PageDown'].includes(e.key)) {
+        e.preventDefault(); this.navigateTo(this.currentSlide + 1);
+      } else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) {
+        e.preventDefault(); this.navigateTo(this.currentSlide - 1);
+      }
+    });
+  }
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      const delta = startY - e.changedTouches[0].clientY;
+      if (Math.abs(delta) > 50) this.navigateTo(this.currentSlide + (delta > 0 ? 1 : -1));
+    }, { passive: true });
+  }
+  setupNavDots() {
+    if (!this.navDotsContainer) return;
+    this.navDotsContainer.innerHTML = '';
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.style.cssText = 'width:9px;height:9px;border-radius:50%;border:none;cursor:pointer;background:rgba(168,168,168,0.4);transition:all 0.3s;padding:0;';
+      dot.addEventListener('click', () => this.navigateTo(i));
+      this.navDotsContainer.appendChild(dot);
+    });
+    this.updateNavDots();
+  }
+  setupBreadcrumbs() {
+    if (!this.breadcrumbsContainer) return;
+    this.breadcrumbsContainer.innerHTML = '';
+    this.slides.forEach((slide, i) => {
+      const btn = document.createElement('button');
+      btn.textContent = slide.getAttribute('data-label') || String(i + 1);
+      btn.addEventListener('click', () => this.navigateTo(i));
+      this.breadcrumbsContainer.appendChild(btn);
+    });
+    this.updateBreadcrumbs();
+  }
+  navigateTo(index) {
+    const clamped = Math.max(0, Math.min(index, this.slides.length - 1));
+    this.slides[clamped].scrollIntoView({ behavior: 'smooth' });
+  }
+  updateNavDots() {
+    if (!this.navDotsContainer) return;
+    this.navDotsContainer.querySelectorAll('button').forEach((dot, i) => {
+      const active = i === this.currentSlide;
+      dot.style.background = active ? 'var(--orange)' : 'rgba(168,168,168,0.4)';
+      dot.style.transform = active ? 'scale(1.5)' : 'scale(1)';
+    });
+  }
+  updateBreadcrumbs() {
+    if (!this.breadcrumbsContainer) return;
+    this.breadcrumbsContainer.querySelectorAll('button').forEach((btn, i) => {
+      btn.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+  updateProgressBar() {
+    if (!this.progressBar) return;
+    this.progressBar.style.width = (((this.currentSlide + 1) / this.slides.length) * 100) + '%';
+  }
+}
+new SlidePresentation();
+</script>
+</body>
+</html>
