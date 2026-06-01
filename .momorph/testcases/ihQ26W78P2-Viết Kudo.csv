@@ -1,0 +1,35 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+GUI,TC_WRITEKUDO_GUI_001,Viết Kudo,Check layout,Screen-wide layout,Overall structure,"Verify modal layout: title, recipient field (*), editor toolbar, content textarea, hashtag field (*), image upload, anonymous toggle, footer Hủy/Gửi",Modal open,,"1. Open send-kudos modal
+2. Compare against design",Layout matches design spec,Yes,High,User interface,,,,
+GUI,TC_WRITEKUDO_GUI_002,Viết Kudo,Initialize,Recipient search,Placeholder text,Verify recipient search shows placeholder and dropdown arrow,Modal open,,1. Observe recipient field,"Placeholder ""Tìm kiếm"" with dropdown arrow",Yes,Medium,User interface,,,,
+GUI,TC_WRITEKUDO_GUI_003,Viết Kudo,Initialize,Content textarea,Placeholder text,Verify content textarea placeholder,Modal open,,1. Observe content textarea,"Placeholder ""Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!""",Yes,Medium,User interface,,,,
+GUI,TC_WRITEKUDO_GUI_004,Viết Kudo,Initialize,Mention hint,Default value/state,Verify mention hint always shown under textarea,Modal open,,1. Observe area under textarea,"Hint ""Bạn có thể """"@ + tên"""" để nhắc tới đồng nghiệp khác"" shown",Yes,Low,User interface,,,,
+GUI,TC_WRITEKUDO_GUI_005,Viết Kudo,Initialize,Add controls,Default value/state,"Verify ""+ Hashtag"" and ""+ Image"" buttons with ""Tối đa 5"" notes",Modal open,,1. Observe hashtag and image sections,"""+ Hashtag"" and ""+ Image"" buttons shown, each with ""Tối đa 5"" note",Yes,Low,User interface,,,,
+GUI,TC_WRITEKUDO_GUI_006,Viết Kudo,Initialize,Send button,Disabled boundary state,"Verify ""Gửi"" disabled when required fields empty, enabled when all filled",Modal open,,"1. Open modal with empty required fields
+2. Fill recipient, content, hashtag","""Gửi"" disabled initially; enabled once required fields filled",Yes,High,User interface,,,,
+FUNCTION,TC_WRITEKUDO_FUN_001,Viết Kudo,Check component interaction,Recipient search,Search,Verify typing filters the Sunner autocomplete and selecting populates the field,Modal open,Existing Sunner name,"1. Type part of a name
+2. Select a result",List filters by keyword; field populated with selected Sunner,Yes,High,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_002,Viết Kudo,Check data validation,Recipient,Required,Verify recipient is required and must be a valid Sunner,Modal open,Valid Sunner; empty,"1. Select a valid Sunner and check
+2. Leave empty and try to submit",Valid selection accepted; empty shows red border + error and blocks submit,Yes,High,Abnormal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_003,Viết Kudo,Check data validation,Content,Required,Verify content is required,Modal open,Non-empty text; empty,"1. Enter content and check
+2. Clear content and try to submit",Non-empty accepted; empty blocks submit,Yes,High,Abnormal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_004,Viết Kudo,Check data validation,Hashtag,Required/Min,Verify at least 1 hashtag is required,Modal open,1 tag; 0 tags,"1. Add 1 hashtag and check
+2. Remove all tags and try to submit",1 tag accepted; 0 tags blocks submit with required error,Yes,High,Abnormal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_005,Viết Kudo,Check data validation,Hashtag,Max,Verify no more than 5 hashtags can be added,Modal open,5 tags; attempt 6th,"1. Add 5 hashtags
+2. Attempt to add a 6th",5 accepted; adding a 6th is prevented,Yes,Medium,Abnormal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_006,Viết Kudo,Check component interaction,Hashtag field,Add/Remove,"Verify adding via dropdown creates a chip and ""x"" removes it",Modal open,,"1. Click ""+ Hashtag"" and add a tag
+2. Click chip ""x""",Chip added then removed,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_007,Viết Kudo,Check component interaction,Editor toolbar,Toggle,Verify Bold/Italic/Stroke/Number/Quote toggle formatting,"Modal open, text selected",,"1. Select text
+2. Toggle each format button",Formatting applied then removed on toggle,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_008,Viết Kudo,Check component interaction,Editor toolbar,Insert link,Verify Link opens URL dialog and inserts a link,Modal open,,"1. Click Link
+2. Enter URL and confirm",URL dialog opens; link inserted into content,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_009,Viết Kudo,Check component interaction,Content textarea,Mention,"Verify ""@ + name"" shows mention suggestions",Modal open,,"1. Type ""@"" then a name",Mention suggestion list appears; selecting inserts the mention,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_010,Viết Kudo,Check component interaction,Image upload,Add/Remove,"Verify ""+ Image"" adds a thumbnail and ""x"" removes it",Modal open,Image file,"1. Click ""+ Image"" and pick a file
+2. Click thumbnail ""x""",Thumbnail added then removed,Yes,Low,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_011,Viết Kudo,Check branching condition,Image upload,Max images,"Verify max 5 images and ""+ Image"" hides at 5",Modal open,5 images,1. Add 5 images,"5 thumbnails shown; ""+ Image"" button hidden",Yes,Low,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_012,Viết Kudo,Check state transition,Anonymous toggle,Toggle,Verify enabling anonymous reveals the anonymous-name field,Modal open,,"1. Toggle anonymous on
+2. Toggle off",On reveals anonymous-name field; off hides it,Yes,Low,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_013,Viết Kudo,Check component interaction,Cancel button,Close,"Verify ""Hủy"" closes the modal and discards changes",Modal open with some input,,"1. Enter some data
+2. Click ""Hủy""",Modal closes; changes discarded; nothing sent,Yes,Medium,Normal_Others,,,,
+FUNCTION,TC_WRITEKUDO_FUN_014,Viết Kudo,Check component interaction,Send button,Submit,"Verify a valid form submits, shows loading, and closes on success",All required fields filled,Recipient + content + 1 hashtag,"1. Fill required fields
+2. Click ""Gửi""",Form validates and submits; loading shown; modal closes on success,Yes,High,Normal_Others,,,,

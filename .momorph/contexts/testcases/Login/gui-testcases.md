@@ -1,0 +1,8 @@
+# Login — GUI Testcases
+
+| TC_ID | Page_Name | Category | Sub_Category | Sub_Sub_Category | Test_Objective | Precondition | Test_Data | Steps | Expected_Result | Specs | Priority | Testcase_Type | Test_Result | Executed_Date | Tester | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| TC_LOGIN_GUI_001 | Login | Check layout | Screen-wide layout | Overall structure | Verify overall layout matches design: background key visual, header (SAA logo + language switcher), centered ROOT FURTHER key visual, welcome text, Google login button, footer copyright | Login page is open |  | 1. Open Login page<br>2. Compare all elements against design | Layout matches design spec | Yes | High | User interface |  |  |  |  |
+| TC_LOGIN_GUI_002 | Login | Initialize | Language switcher | Default value/state | Verify language switcher defaults to VN with flag and chevron | Login page is open |  | 1. Open Login page<br>2. Observe language switcher | Shows VN flag, label "VN", down chevron | Yes | Medium | User interface |  |  |  |  |
+| TC_LOGIN_GUI_003 | Login | Initialize | Login button | Default value/state | Verify login button shows Google icon and label "Đăng nhập bằng Google" | Login page is open |  | 1. Open Login page<br>2. Observe login button | Button shows Google icon and label "Đăng nhập bằng Google" | Yes | High | User interface |  |  |  |  |
+| TC_LOGIN_GUI_004 | Login | Initialize | Login button | Disabled boundary state | Verify login button is disabled and shows spinner while authentication is in progress | Login page is open |  | 1. Click login button<br>2. Observe button during auth | Button disabled, spinner shown | Yes | Medium | User interface |  |  |  |  |

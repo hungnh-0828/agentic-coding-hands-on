@@ -1,0 +1,7 @@
+# Hệ thống giải — GUI Testcases
+
+| TC_ID | Page_Name | Category | Sub_Category | Sub_Sub_Category | Test_Objective | Precondition | Test_Data | Steps | Expected_Result | Specs | Priority | Testcase_Type | Test_Result | Executed_Date | Tester | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| TC_AWARD_GUI_001 | Hệ thống giải | Check layout | Screen-wide layout | Overall structure | Verify overall layout: hero banner, section title, left category menu, six award detail cards, Sun* Kudos promo | Awards page open |  | 1. Open Awards page<br>2. Compare layout against design | Layout matches design spec | Yes | High | User interface |  |  |  |  |
+| TC_AWARD_GUI_002 | Hệ thống giải | Initialize | Left menu | Active/inactive styling | Verify active menu item shows yellow + underline; others normal; hover highlights | Awards page open |  | 1. Observe menu<br>2. Hover an item | Active item yellow/underline, hovered item highlighted, rest normal | Yes | Medium | User interface |  |  |  |  |
+| TC_AWARD_GUI_003 | Hệ thống giải | Check layout | Data-present state | With data | Verify all 6 award cards render image, title, description, quantity+unit, and prize value | Awards page open |  | 1. Scroll through award sections | 6 cards (Top Talent, Top Project, Top Project Leader, Best Manager, Signature 2025 - Creator, MVP) each show image/title/description/quantity/value | Yes | High | User interface |  |  |  |  |
