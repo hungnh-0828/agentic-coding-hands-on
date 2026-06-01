@@ -1,0 +1,57 @@
+# Architecture Shape — SAA 2025 (Sun* Kudos)
+**Use context:** internal
+
+- **Repo shape:** single package — `package.json:4` (`private: true`; no `workspaces` field); [MULTI_STACK] two stacks coexist: TypeScript/Next.js app + HCL/Terraform AWS infra under `infra/`.
+- **Layering:** `app/` · `lib/` · `components/` · `supabase/` · `infra/` · `e2e/`
+  - `app/[locale]/…` — Next.js 16 App Router pages; all routes locale-prefixed via `proxy.ts` middleware.
+  - `lib/` — server-side logic: Supabase clients, server actions, query layer, i18n config, auth mock, event config.
+  - `components/` — UI component tree (React 19, Tailwind v4); no co-located data fetching.
+  - `supabase/` — migrations (`0001–0006`) + seed data; schema-as-code only.
+  - `infra/` — Terraform modules (VPC/ALB/Aurora/ECS/S3/Lambda/SGs) with per-env compositions (`dev`/`staging`/`prod`).
+  - `e2e/` — Playwright tests (chromium, 14 tests across 4 spec files).
+- **Module / package inventory:**
+  - `app/[locale]/page.tsx` — home page (hero, awards, kudos sections) (`app/[locale]/page.tsx:1`)
+  - `app/[locale]/layout.tsx` — root layout; mounts `MockAuthProvider` + next-intl (`app/[locale]/layout.tsx:1`)
+  - `app/[locale]/login/page.tsx` — mock OAuth login page
+  - `app/[locale]/sun-kudos/page.tsx` — live kudos board; sole consumer of `lib/kudos/queries.ts` (`app/[locale]/sun-kudos/page.tsx:1`)
+  - `app/[locale]/admin-dashboard/page.tsx` — award management (admin only)
+  - `app/[locale]/awards-information/page.tsx` — static awards info
+  - `app/[locale]/about-saa-2025/page.tsx` — event about page
+  - `app/[locale]/prelaunch/page.tsx` — pre-launch holding page
+  - `lib/kudos/actions.ts` — `"use server"` actions: `createKudos`, `toggleKudosLike`; uses server Supabase client; placeholder `SENDER_ID` (`lib/kudos/actions.ts:23`)
+  - `lib/kudos/queries.ts` — bulk board fetch (`fetchKudosBoard`), user stats (`fetchKudosStats`); 6 parallel Supabase queries (`lib/kudos/queries.ts:34`)
+  - `lib/kudos/compose-validation.ts` — shared input validation (DRY between server action and UI)
+  - `lib/kudos/hero-badge.ts` — badge rank logic (Rising/Super/Legend from received-kudos count)
+  - `lib/supabase/client.ts` — browser client via `createBrowserClient` (`lib/supabase/client.ts:1`)
+  - `lib/supabase/server.ts` — async server client via `createServerClient` + Next.js cookie jar (`lib/supabase/server.ts:1`)
+  - `lib/auth/mock-auth-context.tsx` — client-side `MockAuthProvider` / `useMockAuth`; no Supabase Auth wired (`lib/auth/mock-auth-context.tsx:1`)
+  - `lib/i18n/routing.ts` — locale routing config (vi default, en)
+  - `lib/i18n/request.ts` — server-side i18n request handling
+  - `lib/i18n/navigation.ts` — localized navigation utilities
+  - `lib/event.ts` — event datetime with env override
+  - `components/kudos/kudos-board-context.tsx` — global kudos board state provider (216 LOC); consumed by 11 files
+  - `components/kudos/compose/compose-kudo-form.tsx` — compose form (168 LOC); direct form state + validation
+  - `components/kudos/compose/` — modal, context, editor, recipient/hashtag pickers, image uploader, form hook
+  - `components/kudos/` — board display components: spotlight, card, sidebar, filters, gallery, like/copy buttons, badges
+  - `components/header/` — site header, account menu, language switcher, nav link, notification bell
+  - `components/awards/` — awards carousel and card
+  - `components/login/` — login form, header, hero, language switcher
+  - `supabase/migrations/` — 6 migration files: users/awards/notifications, RLS, prize fields, kudos schema, compose fields, avatars
+  - `supabase/seed.sql` — seed data for users, depts, hashtags, kudos, awards
+  - `proxy.ts` — next-intl middleware (locale prefix routing); NOTE: named `proxy.ts`, not `middleware.ts` (`proxy.ts:1`)
+  - `infra/modules/{vpc,alb,aurora,ecs,lambda,s3,security-groups}/` — composable Terraform modules
+  - `infra/envs/{dev,staging,prod}/` — per-env Terraform compositions
+- **Architecture signals:**
+  - **God file — `components/kudos/kudos-board-context.tsx`:** 216 LOC, 11 inbound imports (`components/kudos/kudos-board-context.tsx:1`, 11 consumers: `spotlight-board.tsx`, `kudos-card.tsx`, `copy-link-button.tsx`, `compose-kudo-modal.tsx`, `kudos-toast.tsx`, `kudos-filters.tsx`, `kudos-sidebar.tsx`, `all-kudos-section.tsx`, `highlight-section.tsx`, `like-button.tsx`, `app/[locale]/sun-kudos/page.tsx`)
+  - **Cross-module hot-spot — `lib/supabase/server.ts`:** imported by 6 files across `lib/kudos/`, `components/awards/`, `components/header/`, `app/[locale]/awards-information/` (`lib/supabase/server.ts:1`, 6 importers)
+  - **Cross-module hot-spot — `lib/auth/mock-auth-context.tsx`:** imported by 6 files (`login-form.tsx`, `notification-bell.tsx`, `auth-guard.tsx`, `account-menu.tsx`, `kudos-board-context.tsx`, `app/[locale]/layout.tsx`) (`lib/auth/mock-auth-context.tsx:1`)
+  - **Entry points:**
+    - App Router root: `app/[locale]/layout.tsx:1`
+    - i18n middleware: `proxy.ts:1` (non-standard name — Next.js convention is `middleware.ts`)
+    - Kudos board page: `app/[locale]/sun-kudos/page.tsx:1` (sole caller of query layer)
+    - Server actions: `lib/kudos/actions.ts:1` (`"use server"` directive)
+    - Supabase server bootstrap: `lib/supabase/server.ts:6` (`createClient` async factory)
+    - Supabase browser bootstrap: `lib/supabase/client.ts:5` (`createClient` sync factory)
+    - Terraform env entry: `infra/envs/{dev,staging,prod}/main.tf` [config]
+  - **Deployment-target divergence:** `.vercel/` present (active Vercel deployment) alongside `infra/` Terraform ECS Fargate target — two competing deploy paths with no CI/CD pipeline detected (`package.json` [manifest], `infra/envs/*/main.tf` [config])
+  - **Auth layer split:** `lib/auth/mock-auth-context.tsx` drives all UI auth state (client-side only); `lib/supabase/server.ts` provides DB access but Supabase Auth session is NOT connected — `lib/kudos/actions.ts:23` hardcodes `SENDER_ID = "00000000-0000-0000-0000-000000000001"`

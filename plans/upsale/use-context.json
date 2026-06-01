@@ -1,0 +1,20 @@
+{
+  "useContext": "internal",
+  "confidence": "high",
+  "signals": [
+    {"kind": "doc-keyword", "value": "Sun* Kudos live board — banner, highlight carousel, spotlight", "path": "docs/project-changelog.md:51", "direction": "internal", "weight": 3},
+    {"kind": "doc-keyword", "value": "Awards information page + client auth guard", "path": "docs/project-changelog.md:52", "direction": "internal", "weight": 3},
+    {"kind": "doc-keyword", "value": "SAA 2025 (product name in changelog header)", "path": "docs/project-changelog.md:3", "direction": "internal", "weight": 3},
+    {"kind": "private-flag", "value": "private: true", "path": "package.json:4", "direction": "internal", "weight": 2},
+    {"kind": "doc-keyword", "value": "Login screen — mock Google OAuth, bilingual (vi/en)", "path": "docs/project-changelog.md:54", "direction": "internal", "weight": 2},
+    {"kind": "doc-keyword", "value": "Hero badges derived from received-kudos count (Rising/Super/Legend)", "path": "docs/project-changelog.md:31", "direction": "internal", "weight": 2},
+    {"kind": "doc-keyword", "value": "no billing SDK present — no stripe/paddle/lemonsqueezy deps", "path": "package.json", "direction": "internal", "weight": 2},
+    {"kind": "env-prefix", "value": "NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_EVENT_DATETIME", "path": ".env.local", "direction": "internal", "weight": 1},
+    {"kind": "doc-keyword", "value": "Supabase auth (employee login only, not public sign-up)", "path": "package.json:14", "direction": "internal", "weight": 2},
+    {"kind": "doc-keyword", "value": "next-intl i18n for vi/en — internal bilingual workforce tool", "path": "package.json:17", "direction": "internal", "weight": 1},
+    {"kind": "readme-audience", "value": "Boilerplate create-next-app README — no product description, no pricing, no public audience claims", "path": "README.md", "direction": "internal", "weight": 1},
+    {"kind": "corp-host", "value": "ECS Fargate + ALB in private VPC subnets, no public marketplace or SaaS hosting mention", "path": "docs/system-architecture.md:11", "direction": "internal", "weight": 2},
+    {"kind": "doc-keyword", "value": "Mở Secret Box (Vietnamese employee feature, internal event)", "path": "docs/project-changelog.md:27", "direction": "internal", "weight": 1}
+  ],
+  "reason": "docs/project-changelog.md:3 names the product 'SAA 2025' — a Sun Asterisk internal employee recognition (kudos) platform with no billing SDK, no public sign-up, and all features targeting named employee roles."
+}
