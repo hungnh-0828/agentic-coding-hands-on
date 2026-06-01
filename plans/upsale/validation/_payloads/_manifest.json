@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "combined_md_sha256": "b31d231bc915fa0e23a4d1442a0e425fef5fe23335254770f2a08e0b6b04376a",
+  "use_context": "internal",
+  "items": [
+    {
+      "item_index": 1,
+      "item_slug": "resolve-deployment-target-divergence-and-define-authoritative-ci-cd-deploy-path",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-01-resolve-deployment-target-divergence-and-define-authoritative-ci-cd-deploy-path.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-01-resolve-deployment-target-divergence-and-define-authoritative-ci-cd-deploy-path.md"
+    },
+    {
+      "item_index": 2,
+      "item_slug": "rename-mock-auth-context-tsx-to-auth-context-tsx",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-02-rename-mock-auth-context-tsx-to-auth-context-tsx.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-02-rename-mock-auth-context-tsx-to-auth-context-tsx.md"
+    },
+    {
+      "item_index": 3,
+      "item_slug": "add-coverage-provider-baseline-thresholds-and-test-coverage-script",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-03-add-coverage-provider-baseline-thresholds-and-test-coverage-script.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-03-add-coverage-provider-baseline-thresholds-and-test-coverage-script.md"
+    },
+    {
+      "item_index": 4,
+      "item_slug": "add-unit-tests-for-mock-auth-context",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-04-add-unit-tests-for-mock-auth-context.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-04-add-unit-tests-for-mock-auth-context.md"
+    },
+    {
+      "item_index": 5,
+      "item_slug": "add-e2e-coverage-for-admin-dashboard",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-05-add-e2e-coverage-for-admin-dashboard.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-05-add-e2e-coverage-for-admin-dashboard.md"
+    },
+    {
+      "item_index": 6,
+      "item_slug": "bootstrap-github-actions-ci-pipeline-with-lint-tests-and-deploy",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-06-bootstrap-github-actions-ci-pipeline-with-lint-tests-and-deploy.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-06-bootstrap-github-actions-ci-pipeline-with-lint-tests-and-deploy.md"
+    },
+    {
+      "item_index": 7,
+      "item_slug": "add-terraform-ci-cd-pipeline",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-07-add-terraform-ci-cd-pipeline.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-07-add-terraform-ci-cd-pipeline.md"
+    },
+    {
+      "item_index": 8,
+      "item_slug": "add-dockerfile-and-container-build-job",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-08-add-dockerfile-and-container-build-job.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-08-add-dockerfile-and-container-build-job.md"
+    },
+    {
+      "item_index": 9,
+      "item_slug": "enable-avif-image-format-for-lcp-images",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-09-enable-avif-image-format-for-lcp-images.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-09-enable-avif-image-format-for-lcp-images.md"
+    },
+    {
+      "item_index": 10,
+      "item_slug": "cache-kudos-board-data-with-next-js-unstable-cache",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-10-cache-kudos-board-data-with-next-js-unstable-cache.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-10-cache-kudos-board-data-with-next-js-unstable-cache.md"
+    },
+    {
+      "item_index": 11,
+      "item_slug": "tighten-rls-policies-to-prevent-anon-read-of-full-dataset",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-11-tighten-rls-policies-to-prevent-anon-read-of-full-dataset.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-11-tighten-rls-policies-to-prevent-anon-read-of-full-dataset.md"
+    },
+    {
+      "item_index": 12,
+      "item_slug": "patch-vulnerable-esbuild-0-21-5-ghsa-67mh-4wv8-2f99",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-12-patch-vulnerable-esbuild-0-21-5-ghsa-67mh-4wv8-2f99.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-12-patch-vulnerable-esbuild-0-21-5-ghsa-67mh-4wv8-2f99.md"
+    },
+    {
+      "item_index": 13,
+      "item_slug": "add-automated-dependency-vulnerability-scanning",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-13-add-automated-dependency-vulnerability-scanning.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-13-add-automated-dependency-vulnerability-scanning.md"
+    },
+    {
+      "item_index": 14,
+      "item_slug": "add-structured-logging-to-server-actions-and-query-layer",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-14-add-structured-logging-to-server-actions-and-query-layer.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-14-add-structured-logging-to-server-actions-and-query-layer.md"
+    },
+    {
+      "item_index": 15,
+      "item_slug": "integrate-error-reporting-sentry",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-15-integrate-error-reporting-sentry.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-15-integrate-error-reporting-sentry.md"
+    },
+    {
+      "item_index": 16,
+      "item_slug": "implement-notification-write-path-for-kudos-events",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-16-implement-notification-write-path-for-kudos-events.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-16-implement-notification-write-path-for-kudos-events.md"
+    },
+    {
+      "item_index": 17,
+      "item_slug": "add-admin-data-export-endpoint",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-17-add-admin-data-export-endpoint.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-17-add-admin-data-export-endpoint.md"
+    },
+    {
+      "item_index": 18,
+      "item_slug": "rename-proxy-ts-to-middleware-ts",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-18-rename-proxy-ts-to-middleware-ts.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-18-rename-proxy-ts-to-middleware-ts.md"
+    },
+    {
+      "item_index": 19,
+      "item_slug": "wire-supabase-auth-with-oauth-sso-replacing-mockauthprovider-and-hardcoded-sender-id",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-19-wire-supabase-auth-with-oauth-sso-replacing-mockauthprovider-and-hardcoded-sender-id.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-19-wire-supabase-auth-with-oauth-sso-replacing-mockauthprovider-and-hardcoded-sender-id.md"
+    },
+    {
+      "item_index": 20,
+      "item_slug": "add-supabase-session-refresh-to-middleware",
+      "track": "technical",
+      "payload_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/_payloads/item-20-add-supabase-session-refresh-to-middleware.json",
+      "output_path": "/home/nguyen.huy.hungc@sun-asterisk.com/workspace/projects/agentic-coding-hands-on/plans/upsale/validation/item-20-add-supabase-session-refresh-to-middleware.md"
+    }
+  ],
+  "evidence_degraded_warns": []
+}
