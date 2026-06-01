@@ -1,0 +1,2 @@
+- [Project: Next.js 16 + next-intl v4 conventions](project-nextjs16-conventions.md) — proxy.ts = middleware, params is Promise, useTranslations valid in RSC
+- [Project: Demo app auth design](project-demo-auth-design.md) — mock client-side auth is intentional; do not flag as critical
