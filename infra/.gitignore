@@ -1,0 +1,22 @@
+# Terraform state & local artifacts — never commit
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+
+# Local override files
+*_override.tf
+*_override.tf.json
+override.tf
+override.tf.json
+
+# Plan output
+*.tfplan
+tfplan
+
+# Sensitive var files (commit terraform.tfvars only if non-secret)
+*.auto.tfvars
+secrets.tfvars
